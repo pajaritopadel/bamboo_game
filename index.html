@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Esplora con Bambu">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234D96FF'/><text y='.9em' font-size='80'>🐼</text></svg>">
+<title>Esplora con Bambu!</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --c1:#FF6B6B;--c2:#FFD93D;--c3:#6BCB77;--c4:#4D96FF;--c5:#FF6FC8;--c6:#A855F7;
+  --bg:#FFF9F0;--card:#fff;--shadow:0 4px 20px rgba(0,0,0,0.12);
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);min-height:100vh;min-height:-webkit-fill-available;overflow-x:hidden;-webkit-font-smoothing:antialiased;touch-action:manipulation}
+button{cursor:pointer;border:none;outline:none;font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+/* SCREENS */
+.screen{display:none;min-height:100vh;flex-direction:column;align-items:center}
+.screen.active{display:flex}
+
+/* HEADER */
+.top-bar{width:100%;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.stars-bar{display:flex;gap:4px;align-items:center;font-size:22px}
+.star-count{font-size:18px;font-weight:700;color:#FFD93D;margin-left:4px}
+.btn-back{background:none;font-size:28px;padding:4px 8px}
+
+/* BAMBU */
+.bambu-wrap{position:relative;display:flex;flex-direction:column;align-items:center;margin:10px 0}
+.bambu{width:120px;height:120px;transition:transform .3s}
+.bambu.bounce{animation:bounce .5s}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.bambu.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.bubble{background:#fff;border:3px solid #FFD93D;border-radius:20px;padding:10px 16px;max-width:260px;text-align:center;font-size:15px;font-weight:600;color:#333;margin-top:8px;position:relative;box-shadow:var(--shadow)}
+.bubble::before{content:'';position:absolute;top:-14px;left:50%;transform:translateX(-50%);border:7px solid transparent;border-bottom-color:#FFD93D}
+
+/* HOME */
+#home{background:linear-gradient(160deg,#e0f7ff 0%,#fff9f0 100%)}
+.home-title{font-size:38px;font-weight:800;color:#333;margin:20px 0 4px;text-align:center}
+.home-sub{font-size:17px;color:#888;margin-bottom:16px}
+.worlds-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;padding:16px 20px;width:100%;max-width:680px}
+.world-btn{background:var(--card);border-radius:20px;padding:18px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:var(--shadow);transition:transform .2s;border:3px solid transparent;font-size:15px;font-weight:700;color:#333}
+.world-btn:active{transform:scale(.95)}
+.world-btn span.ico{font-size:48px}
+
+/* WORLD SELECT */
+#world-screen{background:#fff}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:16px 20px;width:100%;max-width:640px}
+.game-btn{background:var(--card);border-radius:20px;padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:var(--shadow);transition:transform .2s;font-size:15px;font-weight:700;color:#333;border:3px solid transparent}
+.game-btn:active{transform:scale(.95)}
+.game-btn span.ico{font-size:42px}
+.world-title{font-size:26px;font-weight:800;margin:12px 0 0;color:#333}
+
+/* GAME SCREEN */
+#game-screen{background:var(--bg)}
+.game-area{width:100%;max-width:620px;padding:12px 20px;flex:1;display:flex;flex-direction:column;align-items:center;gap:12px}
+.game-question{font-size:20px;font-weight:700;color:#333;text-align:center;background:#fff;border-radius:16px;padding:14px 20px;box-shadow:var(--shadow);width:100%}
+.options-grid{display:grid;gap:12px;width:100%}
+.opt-btn{border-radius:18px;padding:16px;font-size:32px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:var(--shadow);background:#fff;border:4px solid transparent;transition:transform .15s,border-color .2s;font-weight:700;color:#444;font-family:inherit}
+.opt-btn span.lbl{font-size:15px;font-weight:700}
+.opt-btn:active{transform:scale(.93)}
+.opt-btn.correct{border-color:#6BCB77;background:#f0fff4;animation:pop .4s}
+.opt-btn.wrong{border-color:#FF6B6B;background:#fff0f0;animation:wobble .4s}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes wobble{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+
+/* STARS CELEBRATION */
+.celebration{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);z-index:100;flex-direction:column;gap:12px}
+.celebration.show{display:flex}
+.cel-box{background:#fff;border-radius:24px;padding:28px 36px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.2)}
+.cel-stars{font-size:44px;letter-spacing:4px}
+.cel-msg{font-size:22px;font-weight:800;color:#333;margin:8px 0}
+.cel-btn{background:#FFD93D;border-radius:14px;padding:12px 32px;font-size:17px;font-weight:800;color:#333;margin-top:10px;box-shadow:0 4px 12px rgba(255,217,61,0.5)}
+
+/* confetti */
+.confetti-c{position:fixed;pointer-events:none;top:0;left:0;width:100%;height:100%;z-index:99}
+
+/* iPad layout */
+@media(min-width:768px){
+  .worlds-grid{grid-template-columns:repeat(4,1fr);max-width:780px}
+  .games-grid{grid-template-columns:repeat(3,1fr);max-width:700px}
+  .opt-btn{padding:22px;font-size:40px}
+  .opt-btn span.lbl{font-size:18px}
+  .bambu{width:150px;height:150px}
+  .bubble{font-size:17px;max-width:320px}
+  .game-question{font-size:24px;padding:18px 24px}
+  .home-title{font-size:44px}
+  .world-btn span.ico{font-size:58px}
+  .world-btn{font-size:17px;padding:22px 14px}
+  .game-btn span.ico{font-size:52px}
+  .game-btn{font-size:17px;padding:24px 14px}
+  .cel-box{padding:36px 52px}
+  .cel-stars{font-size:52px}
+  .cel-msg{font-size:26px}
+  .cel-btn{font-size:20px;padding:16px 40px}
+  .game-area{max-width:720px}
+}
+
+/* iPad Pro / landscape */
+@media(min-width:1024px){
+  .worlds-grid{grid-template-columns:repeat(4,1fr);max-width:900px}
+  .options-grid{grid-template-columns:repeat(4,1fr)!important}
+  .opt-btn{font-size:44px}
+}
+
+/* Small phones */
+@media(max-width:480px){
+  .worlds-grid{grid-template-columns:repeat(2,1fr)}
+  .games-grid{grid-template-columns:repeat(2,1fr)}
+  .home-title{font-size:28px}
+  .bambu{width:90px;height:90px}
+}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="home" class="screen active">
+  <div class="top-bar">
+    <div style="font-size:22px;font-weight:800;color:#333">🌟 Esplora con Bambu!</div>
+    <div class="stars-bar">⭐<span class="star-count" id="total-stars">0</span></div>
+  </div>
+  <div class="bambu-wrap" style="margin-top:16px">
+    <div class="bambu" id="bambu-home">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="60" cy="28" rx="34" ry="8" fill="#6BCB77"/>
+        <rect x="30" y="16" width="60" height="16" rx="4" fill="#4D96FF"/>
+        <polygon points="60,2 50,16 70,16" fill="#FF6B6B"/>
+        <circle cx="60" cy="4" r="4" fill="#FFD93D"/>
+        <circle cx="28" cy="44" r="14" fill="#333"/>
+        <circle cx="28" cy="44" r="9" fill="#fff"/>
+        <circle cx="92" cy="44" r="14" fill="#333"/>
+        <circle cx="92" cy="44" r="9" fill="#fff"/>
+        <ellipse cx="60" cy="60" rx="36" ry="34" fill="#fff" stroke="#333" stroke-width="2"/>
+        <ellipse cx="47" cy="54" rx="7" ry="8" fill="#333"/>
+        <ellipse cx="73" cy="54" rx="7" ry="8" fill="#333"/>
+        <circle cx="49" cy="52" r="2.5" fill="#fff"/>
+        <circle cx="75" cy="52" r="2.5" fill="#fff"/>
+        <ellipse cx="60" cy="66" rx="5" ry="3.5" fill="#FF6B6B"/>
+        <path d="M48 74 Q60 84 72 74" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="38" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
+        <circle cx="82" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
+        <ellipse cx="60" cy="100" rx="26" ry="20" fill="#333"/>
+        <ellipse cx="60" cy="100" rx="16" ry="15" fill="#fff"/>
+      </svg>
+    </div>
+    <div class="bubble" id="bubble-home">Ciao! Sono Bambu! 🐼<br>Scegli un mondo da esplorare!</div>
+  </div>
+  <div class="worlds-grid">
+    <button class="world-btn" onclick="openWorld('casa')" style="border-color:#FF6B6B"><span class="ico">🏠</span>Casa</button>
+    <button class="world-btn" onclick="openWorld('fattoria')" style="border-color:#6BCB77"><span class="ico">🐄</span>Fattoria</button>
+    <button class="world-btn" onclick="openWorld('parco')" style="border-color:#FFD93D"><span class="ico">🌳</span>Parco</button>
+    <button class="world-btn" onclick="openWorld('mare')" style="border-color:#4D96FF"><span class="ico">🌊</span>Mare</button>
+    <button class="world-btn" onclick="openWorld('montagna')" style="border-color:#A855F7"><span class="ico">🏔️</span>Montagna</button>
+    <button class="world-btn" onclick="openWorld('scuola')" style="border-color:#FF6FC8"><span class="ico">🏫</span>Scuola</button>
+    <button class="world-btn" onclick="openWorld('spazio')" style="border-color:#6BCB77;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff"><span class="ico">🪐</span><span style="color:#fff">Pianeta Zog</span></button>
+  </div>
+</div>
+
+<!-- WORLD SCREEN -->
+<div id="world-screen" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="goHome()">⬅️</button>
+    <div class="world-title" id="world-title"></div>
+    <div class="stars-bar">⭐<span class="star-count" id="ws-stars">0</span></div>
+  </div>
+  <div class="bambu-wrap">
+    <div class="bambu" id="bambu-world">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="60" cy="28" rx="34" ry="8" fill="#6BCB77"/>
+        <rect x="30" y="16" width="60" height="16" rx="4" fill="#4D96FF"/>
+        <polygon points="60,2 50,16 70,16" fill="#FF6B6B"/>
+        <circle cx="60" cy="4" r="4" fill="#FFD93D"/>
+        <circle cx="28" cy="44" r="14" fill="#333"/>
+        <circle cx="28" cy="44" r="9" fill="#fff"/>
+        <circle cx="92" cy="44" r="14" fill="#333"/>
+        <circle cx="92" cy="44" r="9" fill="#fff"/>
+        <ellipse cx="60" cy="60" rx="36" ry="34" fill="#fff" stroke="#333" stroke-width="2"/>
+        <ellipse cx="47" cy="54" rx="7" ry="8" fill="#333"/>
+        <ellipse cx="73" cy="54" rx="7" ry="8" fill="#333"/>
+        <circle cx="49" cy="52" r="2.5" fill="#fff"/>
+        <circle cx="75" cy="52" r="2.5" fill="#fff"/>
+        <ellipse cx="60" cy="66" rx="5" ry="3.5" fill="#FF6B6B"/>
+        <path d="M48 74 Q60 84 72 74" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="38" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
+        <circle cx="82" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
+        <ellipse cx="60" cy="100" rx="26" ry="20" fill="#333"/>
+        <ellipse cx="60" cy="100" rx="16" ry="15" fill="#fff"/>
+      </svg>
+    </div>
+    <div class="bubble" id="bubble-world">Che gioco vuoi fare?</div>
+  </div>
+  <div class="games-grid" id="games-grid"></div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="game-screen" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="backToWorld()">⬅️</button>
+    <div style="font-size:17px;font-weight:700;color:#333" id="game-title-bar"></div>
+    <div class="stars-bar">⭐<span class="star-count" id="gs-stars">0</span></div>
+  </div>
+  <div class="game-area">
+    <div class="bambu-wrap">
+      <div class="bambu" id="bambu-game">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="60" cy="28" rx="34" ry="8" fill="#6BCB77"/>
+          <rect x="30" y="16" width="60" height="16" rx="4" fill="#4D96FF"/>
+          <polygon points="60,2 50,16 70,16" fill="#FF6B6B"/>
+          <circle cx="60" cy="4" r="4" fill="#FFD93D"/>
+          <circle cx="28" cy="44" r="14" fill="#333"/>
+          <circle cx="28" cy="44" r="9" fill="#fff"/>
+          <circle cx="92" cy="44" r="14" fill="#333"/>
+          <circle cx="92" cy="44" r="9" fill="#fff"/>
+          <ellipse cx="60" cy="60" rx="36" ry="34" fill="#fff" stroke="#333" stroke-width="2"/>
+          <ellipse cx="47" cy="54" rx="7" ry="8" fill="#333"/>
+          <ellipse cx="73" cy="54" rx="7" ry="8" fill="#333"/>
+          <circle cx="49" cy="52" r="2.5" fill="#fff"/>
+          <circle cx="75" cy="52" r="2.5" fill="#fff"/>
+          <ellipse cx="60" cy="66" rx="5" ry="3.5" fill="#FF6B6B"/>
+          <path d="M48 74 Q60 84 72 74" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="38" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
+          <circle cx="82" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
+          <ellipse cx="60" cy="100" rx="26" ry="20" fill="#333"/>
+          <ellipse cx="60" cy="100" rx="16" ry="15" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="bubble" id="bubble-game">Tocca la risposta giusta!</div>
+    </div>
+    <div class="game-question" id="game-question"></div>
+    <div class="options-grid" id="options-grid"></div>
+  </div>
+</div>
+
+<!-- CELEBRATION -->
+<div class="celebration" id="celebration">
+  <canvas class="confetti-c" id="confetti-c"></canvas>
+  <div class="cel-box">
+    <div class="cel-stars" id="cel-stars">⭐⭐⭐</div>
+    <div class="cel-msg" id="cel-msg">Bravissimo!</div>
+    <div style="font-size:15px;color:#888;margin-top:4px" id="cel-sub"></div>
+    <button class="cel-btn" onclick="nextQuestion()">Avanti! ➡️</button>
+  </div>
+</div>
+
+<script>
+const WORLDS = {
+  casa:{name:'🏠 Casa',color:'#FF6B6B',
+    games:[
+      {id:'forme',name:'Le forme',ico:'🔷',
+        questions:[
+          {q:'Qual è il cerchio? 🔴',opts:[{e:'🔴',l:'Cerchio'},{e:'🔲',l:'Quadrato'},{e:'🔺',l:'Triangolo'},{e:'⬜',l:'Rettangolo'}],a:0},
+          {q:'Qual è il quadrato?',opts:[{e:'🔵',l:'Cerchio'},{e:'🟥',l:'Quadrato'},{e:'🔺',l:'Triangolo'},{e:'💠',l:'Rombo'}],a:1},
+          {q:'Qual è il triangolo?',opts:[{e:'⬜',l:'Quadrato'},{e:'🔵',l:'Cerchio'},{e:'🔻',l:'Triangolo'},{e:'⬛',l:'Rettangolo'}],a:2},
+          {q:'Quante stelle vedi? ⭐⭐⭐',opts:[{e:'2',l:'Due'},{e:'3',l:'Tre'},{e:'4',l:'Quattro'},{e:'1',l:'Una'}],a:1},
+          {q:'Qual è la forma ovale?',opts:[{e:'🟦',l:'Quadrato'},{e:'🥚',l:'Ovale'},{e:'🔺',l:'Triangolo'},{e:'⭕',l:'Cerchio'}],a:1},
+        ]},
+      {id:'colori',name:'I colori',ico:'🎨',
+        questions:[
+          {q:'Tocca il colore ROSSO 🎨',opts:[{e:'🔴',l:'Rosso'},{e:'🔵',l:'Blu'},{e:'🟡',l:'Giallo'},{e:'🟢',l:'Verde'}],a:0},
+          {q:'Tocca il colore BLU',opts:[{e:'🟡',l:'Giallo'},{e:'🟠',l:'Arancio'},{e:'🔵',l:'Blu'},{e:'🟣',l:'Viola'}],a:2},
+          {q:'Tocca il colore GIALLO',opts:[{e:'🔴',l:'Rosso'},{e:'🟡',l:'Giallo'},{e:'🟢',l:'Verde'},{e:'⚫',l:'Nero'}],a:1},
+          {q:'Tocca il colore VERDE',opts:[{e:'🔵',l:'Blu'},{e:'🟣',l:'Viola'},{e:'🟡',l:'Giallo'},{e:'🟢',l:'Verde'}],a:3},
+          {q:'Tocca il colore ARANCIO 🍊',opts:[{e:'🟠',l:'Arancio'},{e:'🔴',l:'Rosso'},{e:'🟡',l:'Giallo'},{e:'🟤',l:'Marrone'}],a:0},
+        ]},
+      {id:'lettere',name:'Le lettere',ico:'🔤',
+        questions:[
+          {q:'Quale lettera è la A?',opts:[{e:'B',l:'B'},{e:'A',l:'A'},{e:'C',l:'C'},{e:'D',l:'D'}],a:1},
+          {q:'Quale lettera è la O?',opts:[{e:'Q',l:'Q'},{e:'C',l:'C'},{e:'O',l:'O'},{e:'G',l:'G'}],a:2},
+          {q:'Quale lettera è la M?',opts:[{e:'N',l:'N'},{e:'M',l:'M'},{e:'W',l:'W'},{e:'H',l:'H'}],a:1},
+          {q:'Quale lettera è la S?',opts:[{e:'Z',l:'Z'},{e:'5',l:'5'},{e:'S',l:'S'},{e:'8',l:'8'}],a:2},
+          {q:'Quale lettera è la T?',opts:[{e:'I',l:'I'},{e:'T',l:'T'},{e:'L',l:'L'},{e:'F',l:'F'}],a:1},
+        ]},
+    ]},
+  fattoria:{name:'🐄 Fattoria',color:'#6BCB77',
+    games:[
+      {id:'animali',name:'Gli animali',ico:'🐮',
+        questions:[
+          {q:'Chi fa MUU? 🐮',opts:[{e:'🐮',l:'Mucca'},{e:'🐷',l:'Maiale'},{e:'🐔',l:'Gallina'},{e:'🐑',l:'Pecora'}],a:0},
+          {q:'Chi fa OINK? 🐷',opts:[{e:'🐮',l:'Mucca'},{e:'🐔',l:'Gallina'},{e:'🐴',l:'Cavallo'},{e:'🐷',l:'Maiale'}],a:3},
+          {q:'Chi fa CHICCHIRICHÌ?',opts:[{e:'🦆',l:'Anatra'},{e:'🐔',l:'Gallo'},{e:'🐮',l:'Mucca'},{e:'🐑',l:'Pecora'}],a:1},
+          {q:'Chi fa BEE BEE?',opts:[{e:'🐑',l:'Pecora'},{e:'🐷',l:'Maiale'},{e:'🐂',l:'Toro'},{e:'🐔',l:'Gallina'}],a:0},
+          {q:'Chi fa I-OH? 🫏',opts:[{e:'🐴',l:'Cavallo'},{e:'🫏',l:'Asino'},{e:'🐄',l:'Mucca'},{e:'🐐',l:'Capra'}],a:1},
+        ]},
+      {id:'numeri',name:'Conta!',ico:'🔢',
+        questions:[
+          {q:'Quante mele vedi? 🍎🍎',opts:[{e:'1',l:'Una'},{e:'2',l:'Due'},{e:'3',l:'Tre'},{e:'4',l:'Quattro'}],a:1},
+          {q:'Quante galline? 🐔🐔🐔',opts:[{e:'2',l:'Due'},{e:'4',l:'Quattro'},{e:'3',l:'Tre'},{e:'1',l:'Una'}],a:2},
+          {q:'Quante uova? 🥚🥚🥚🥚',opts:[{e:'3',l:'Tre'},{e:'4',l:'Quattro'},{e:'5',l:'Cinque'},{e:'2',l:'Due'}],a:1},
+          {q:'Quanti fiori? 🌸',opts:[{e:'2',l:'Due'},{e:'1',l:'Uno'},{e:'3',l:'Tre'},{e:'4',l:'Quattro'}],a:1},
+          {q:'Quanti maiali? 🐷🐷🐷🐷🐷',opts:[{e:'4',l:'Quattro'},{e:'6',l:'Sei'},{e:'5',l:'Cinque'},{e:'3',l:'Tre'}],a:2},
+        ]},
+      {id:'verdure',name:'Le verdure',ico:'🥕',
+        questions:[
+          {q:'Qual è la carota? 🥕',opts:[{e:'🥕',l:'Carota'},{e:'🍅',l:'Pomodoro'},{e:'🥦',l:'Broccolo'},{e:'🌽',l:'Mais'}],a:0},
+          {q:'Qual è il pomodoro?',opts:[{e:'🍋',l:'Limone'},{e:'🍊',l:'Arancio'},{e:'🍅',l:'Pomodoro'},{e:'🍎',l:'Mela'}],a:2},
+          {q:'Qual è il mais?',opts:[{e:'🥕',l:'Carota'},{e:'🌽',l:'Mais'},{e:'🥦',l:'Broccolo'},{e:'🧅',l:'Cipolla'}],a:1},
+          {q:'Di che colore è la carota?',opts:[{e:'🔴',l:'Rosso'},{e:'🟢',l:'Verde'},{e:'🟠',l:'Arancio'},{e:'🟡',l:'Giallo'}],a:2},
+          {q:'Di che colore è il broccolo?',opts:[{e:'🟠',l:'Arancio'},{e:'🟢',l:'Verde'},{e:'🔴',l:'Rosso'},{e:'🟡',l:'Giallo'}],a:1},
+        ]},
+    ]},
+  parco:{name:'🌳 Parco',color:'#FFD93D',
+    games:[
+      {id:'insetti',name:'Gli insetti',ico:'🦋',
+        questions:[
+          {q:'Quale insetto ha le ali colorate? 🦋',opts:[{e:'🐜',l:'Formica'},{e:'🦋',l:'Farfalla'},{e:'🐛',l:'Bruco'},{e:'🪲',l:'Coleottero'}],a:1},
+          {q:'Chi vive nell\'alveare? 🍯',opts:[{e:'🦗',l:'Grillo'},{e:'🐛',l:'Bruco'},{e:'🐝',l:'Ape'},{e:'🐞',l:'Coccinella'}],a:2},
+          {q:'Quanti punti ha la coccinella? ⚫⚫⚫⚫⚫⚫⚫',opts:[{e:'5',l:'Cinque'},{e:'6',l:'Sei'},{e:'7',l:'Sette'},{e:'8',l:'Otto'}],a:2},
+          {q:'Come si chiama questo 🐛?',opts:[{e:'Ape',l:'🐝'},{e:'Bruco',l:'🐛'},{e:'Lumaca',l:'🐌'},{e:'Verme',l:'🪱'}],a:1},
+          {q:'Chi salta nell\'erba? 🌿',opts:[{e:'🦋',l:'Farfalla'},{e:'🐜',l:'Formica'},{e:'🦗',l:'Grillo'},{e:'🐛',l:'Bruco'}],a:2},
+        ]},
+      {id:'alberi',name:'La natura',ico:'🌸',
+        questions:[
+          {q:'Di che colore sono le foglie in primavera?',opts:[{e:'🟡',l:'Gialle'},{e:'🟢',l:'Verdi'},{e:'🔴',l:'Rosse'},{e:'🟤',l:'Marroni'}],a:1},
+          {q:'Cosa produce l\'albero di mele?',opts:[{e:'🍊',l:'Arance'},{e:'🍋',l:'Limoni'},{e:'🍎',l:'Mele'},{e:'🍇',l:'Uva'}],a:2},
+          {q:'Come si chiama questo 🌸?',opts:[{e:'Foglia',l:'🍃'},{e:'Fiore',l:'🌸'},{e:'Radice',l:'🌱'},{e:'Frutto',l:'🍎'}],a:1},
+          {q:'Dov\'è il sole? ☀️',opts:[{e:'🌍',l:'Sotto la terra'},{e:'🌊',l:'In fondo al mare'},{e:'☁️',l:'Dietro le nuvole'},{e:'☀️',l:'In cielo'}],a:3},
+          {q:'Cosa fa la pioggia?',opts:[{e:'🌱',l:'Fa crescere le piante'},{e:'🔥',l:'Fa fuoco'},{e:'❄️',l:'Fa la neve'},{e:'💨',l:'Fa il vento'}],a:0},
+        ]},
+    ]},
+  mare:{name:'🌊 Mare',color:'#4D96FF',
+    games:[
+      {id:'pesci',name:'I pesci',ico:'🐠',
+        questions:[
+          {q:'Quale animale ha 8 tentacoli? 🐙',opts:[{e:'🦑',l:'Calamaro'},{e:'🐙',l:'Polpo'},{e:'🦀',l:'Granchio'},{e:'🐡',l:'Pesce palla'}],a:1},
+          {q:'Chi nuota velocissimo?',opts:[{e:'🐢',l:'Tartaruga'},{e:'🦀',l:'Granchio'},{e:'🐬',l:'Delfino'},{e:'🐙',l:'Polpo'}],a:2},
+          {q:'Di che colore è il mare?',opts:[{e:'🔴',l:'Rosso'},{e:'🟡',l:'Giallo'},{e:'🔵',l:'Blu'},{e:'🟢',l:'Verde'}],a:2},
+          {q:'Come si chiama questo 🐚?',opts:[{e:'Pietra',l:'🪨'},{e:'Conchiglia',l:'🐚'},{e:'Corallo',l:'🪸'},{e:'Stella',l:'⭐'}],a:1},
+          {q:'Chi vola sopra il mare?',opts:[{e:'🐬',l:'Delfino'},{e:'🦈',l:'Squalo'},{e:'🐙',l:'Polpo'},{e:'🐦',l:'Gabbiano'}],a:3},
+        ]},
+      {id:'colori_mare',name:'I colori del mare',ico:'🎨',
+        questions:[
+          {q:'Di che colore è la stella marina?',opts:[{e:'🔵',l:'Blu'},{e:'🟠',l:'Arancio/Rosso'},{e:'🟢',l:'Verde'},{e:'🟡',l:'Giallo'}],a:1},
+          {q:'Di che colore è il polpo?',opts:[{e:'🟣',l:'Viola/Rosso'},{e:'🟡',l:'Giallo'},{e:'🟢',l:'Verde'},{e:'⬛',l:'Nero'}],a:0},
+          {q:'Di che colore è la sabbia?',opts:[{e:'🔵',l:'Blu'},{e:'🟡',l:'Gialla'},{e:'🔴',l:'Rossa'},{e:'🟢',l:'Verde'}],a:1},
+          {q:'Di che colore è la tartaruga marina?',opts:[{e:'🔴',l:'Rossa'},{e:'🟡',l:'Gialla'},{e:'🟢',l:'Verde'},{e:'🔵',l:'Blu'}],a:2},
+          {q:'Di che colore è il delfino?',opts:[{e:'🟢',l:'Verde'},{e:'🔴',l:'Rosso'},{e:'⬜',l:'Grigio/Bianco'},{e:'🟡',l:'Giallo'}],a:2},
+        ]},
+    ]},
+  montagna:{name:'🏔️ Montagna',color:'#A855F7',
+    games:[
+      {id:'animali_mont',name:'Gli animali',ico:'🦅',
+        questions:[
+          {q:'Chi vola alto sulle montagne? 🦅',opts:[{e:'🐟',l:'Pesce'},{e:'🦅',l:'Aquila'},{e:'🐢',l:'Tartaruga'},{e:'🐄',l:'Mucca'}],a:1},
+          {q:'Quale animale ha il corno?',opts:[{e:'🦊',l:'Volpe'},{e:'🐻',l:'Orso'},{e:'🐐',l:'Capra di montagna'},{e:'🐰',l:'Coniglio'}],a:2},
+          {q:'Di che colore è la neve? ❄️',opts:[{e:'⬜',l:'Bianca'},{e:'🔵',l:'Blu'},{e:'🟡',l:'Gialla'},{e:'🩶',l:'Grigia'}],a:0},
+          {q:'Chi dorme tutto l\'inverno?',opts:[{e:'🦅',l:'Aquila'},{e:'🐺',l:'Lupo'},{e:'🐻',l:'Orso'},{e:'🐐',l:'Capra'}],a:2},
+          {q:'Cosa si mette ai piedi sulla neve?',opts:[{e:'🩴',l:'Sandali'},{e:'🎿',l:'Sci'},{e:'👡',l:'Tacchi'},{e:'🩰',l:'Scarpette'}],a:1},
+        ]},
+      {id:'stagioni',name:'Le stagioni',ico:'🍂',
+        questions:[
+          {q:'In quale stagione cade la neve? ❄️',opts:[{e:'🌸',l:'Primavera'},{e:'☀️',l:'Estate'},{e:'🍂',l:'Autunno'},{e:'❄️',l:'Inverno'}],a:3},
+          {q:'In quale stagione fioriscono i fiori?',opts:[{e:'❄️',l:'Inverno'},{e:'🌸',l:'Primavera'},{e:'🍂',l:'Autunno'},{e:'☀️',l:'Estate'}],a:1},
+          {q:'Quando fa più caldo?',opts:[{e:'❄️',l:'Inverno'},{e:'🌸',l:'Primavera'},{e:'☀️',l:'Estate'},{e:'🍂',l:'Autunno'}],a:2},
+          {q:'In quale stagione cadono le foglie?',opts:[{e:'🍂',l:'Autunno'},{e:'🌸',l:'Primavera'},{e:'☀️',l:'Estate'},{e:'❄️',l:'Inverno'}],a:0},
+          {q:'Quante stagioni ci sono in un anno?',opts:[{e:'2',l:'Due'},{e:'3',l:'Tre'},{e:'4',l:'Quattro'},{e:'5',l:'Cinque'}],a:2},
+        ]},
+    ]},
+  scuola:{name:'🏫 Scuola',color:'#FF6FC8',
+    games:[
+      {id:'lettere_scuola',name:'L\'alfabeto',ico:'🔤',
+        questions:[
+          {q:'Quale lettera viene prima? A _ C',opts:[{e:'Z',l:'Z'},{e:'B',l:'B'},{e:'D',l:'D'},{e:'E',l:'E'}],a:1},
+          {q:'Che lettera inizia MELA 🍎?',opts:[{e:'A',l:'A'},{e:'M',l:'M'},{e:'N',l:'N'},{e:'P',l:'P'}],a:1},
+          {q:'Che lettera inizia SOLE ☀️?',opts:[{e:'S',l:'S'},{e:'C',l:'C'},{e:'Z',l:'Z'},{e:'T',l:'T'}],a:0},
+          {q:'Che lettera inizia GATTO 🐱?',opts:[{e:'C',l:'C'},{e:'K',l:'K'},{e:'G',l:'G'},{e:'J',l:'J'}],a:2},
+          {q:'Che lettera inizia PAPÀ 👨?',opts:[{e:'B',l:'B'},{e:'D',l:'D'},{e:'P',l:'P'},{e:'F',l:'F'}],a:2},
+        ]},
+      {id:'numeri_scuola',name:'I numeri',ico:'🔢',
+        questions:[
+          {q:'Quale numero viene dopo il 2?',opts:[{e:'1',l:'1'},{e:'4',l:'4'},{e:'3',l:'3'},{e:'5',l:'5'}],a:2},
+          {q:'Quale numero viene dopo il 4?',opts:[{e:'3',l:'3'},{e:'5',l:'5'},{e:'6',l:'6'},{e:'2',l:'2'}],a:1},
+          {q:'Quanto fa 1 + 1?',opts:[{e:'3',l:'3'},{e:'1',l:'1'},{e:'2',l:'2'},{e:'4',l:'4'}],a:2},
+          {q:'Quale numero è il più grande?',opts:[{e:'2',l:'2'},{e:'5',l:'5'},{e:'3',l:'3'},{e:'1',l:'1'}],a:1},
+          {q:'Quanto fa 2 + 1?',opts:[{e:'4',l:'4'},{e:'2',l:'2'},{e:'5',l:'5'},{e:'3',l:'3'}],a:3},
+        ]},
+      {id:'strumenti',name:'Gli strumenti',ico:'✏️',
+        questions:[
+          {q:'Con cosa si disegna? ✏️',opts:[{e:'✏️',l:'Matita'},{e:'✂️',l:'Forbici'},{e:'📏',l:'Righello'},{e:'🗑️',l:'Cestino'}],a:0},
+          {q:'Con cosa si taglia?',opts:[{e:'✏️',l:'Matita'},{e:'✂️',l:'Forbici'},{e:'📚',l:'Libro'},{e:'🖍️',l:'Pennarello'}],a:1},
+          {q:'Dove si scrive a scuola?',opts:[{e:'🛁',l:'Vasca'},{e:'🪟',l:'Finestra'},{e:'📖',l:'Quaderno'},{e:'🪑',l:'Sedia'}],a:2},
+          {q:'Di che colore è la lavagna?',opts:[{e:'⬛',l:'Nera/Verde'},{e:'⬜',l:'Bianca'},{e:'🟡',l:'Gialla'},{e:'🔴',l:'Rossa'}],a:0},
+          {q:'Cosa si mette nello zaino?',opts:[{e:'🍕',l:'Pizza'},{e:'📚',l:'Libri'},{e:'🚗',l:'Macchina'},{e:'🛏️',l:'Letto'}],a:1},
+        ]},
+    ]},
+  spazio:{name:'🪐 Pianeta Zog',color:'#6BCB77',
+    games:[
+      {id:'pianeti',name:'I pianeti',ico:'🪐',
+        questions:[
+          {q:'Qual è il nostro pianeta? 🌍',opts:[{e:'🌙',l:'Luna'},{e:'🌍',l:'Terra'},{e:'☀️',l:'Sole'},{e:'⭐',l:'Stella'}],a:1},
+          {q:'Di che colore è il Sole?',opts:[{e:'🔵',l:'Blu'},{e:'🟢',l:'Verde'},{e:'🟡',l:'Giallo/Arancio'},{e:'🟣',l:'Viola'}],a:2},
+          {q:'Cosa appare di notte in cielo?',opts:[{e:'☀️',l:'Sole'},{e:'🌈',l:'Arcobaleno'},{e:'⭐',l:'Stelle'},{e:'🌊',l:'Mare'}],a:2},
+          {q:'Come si chiama chi va nello spazio? 👨‍🚀',opts:[{e:'👩‍🍳',l:'Cuoca'},{e:'👨‍🚀',l:'Astronauta'},{e:'👩‍🏫',l:'Maestra'},{e:'👨‍⚕️',l:'Dottore'}],a:1},
+          {q:'Come si muove nello spazio?',opts:[{e:'🚌',l:'Autobus'},{e:'🚂',l:'Treno'},{e:'🚀',l:'Razzo'},{e:'🚗',l:'Macchina'}],a:2},
+        ]},
+      {id:'alieni',name:'Gli alieni di Zog',ico:'👽',
+        questions:[
+          {q:'Di che colore è l\'alieno Zog? 💚',opts:[{e:'🔵',l:'Blu'},{e:'🔴',l:'Rosso'},{e:'💚',l:'Verde'},{e:'🟡',l:'Giallo'}],a:2},
+          {q:'Quante antenne ha Zog? 📡📡',opts:[{e:'1',l:'Una'},{e:'2',l:'Due'},{e:'3',l:'Tre'},{e:'4',l:'Quattro'}],a:1},
+          {q:'Su quale pianeta vive Zog?',opts:[{e:'🌍',l:'Terra'},{e:'🌙',l:'Luna'},{e:'🪐',l:'Pianeta Zog'},{e:'☀️',l:'Sole'}],a:2},
+          {q:'Cosa mangia Zog? ⭐',opts:[{e:'🍕',l:'Pizza'},{e:'⭐',l:'Stelle di meteora'},{e:'🍎',l:'Mele'},{e:'🍦',l:'Gelato'}],a:1},
+          {q:'Come saluta Zog?',opts:[{e:'👋',l:'Ciao!'},{e:'🤖',l:'Beep boop!'},{e:'💫',l:'Zum zum!'},{e:'🌟',l:'Zog zog!'}],a:3},
+        ]},
+    ]},
+};
+
+const BAMBU_CORRECT=['Fantastico! 🎉','Bravissimo! ⭐','Esatto! Sei un campione! 🏆','Perfetto! Bambu è fiero di te! 🐼','Wow, giusto! Sei super! 🌟'];
+const BAMBU_WRONG=['Ops! Riprova! Guarda bene... 👀','Non è quella! Dai, ce la fai! 💪','Quasi! Pensa ancora... 🤔','No no! Ma sei quasi arrivato! 😊','Riprova! Bambu crede in te! 🐼'];
+const BAMBU_INTRO={forme:'Abbiniamo le forme! Tocca quella giusta! 🔷',colori:'Che belli i colori! Tocca quello giusto! 🎨',lettere:'Le lettere dell\'alfabeto! Tocca quella che vedi! 🔤',animali:'Gli animali della fattoria! Chi fa quel verso? 🐮',numeri:'Contiamo insieme! Quanti ne vedi? 🔢',verdure:'Le verdure dell\'orto! Sai quale è? 🥕',insetti:'Gli insettini del parco! Li conosci? 🦋',alberi:'La natura del parco! Sai rispondere? 🌳',pesci:'Gli animali del mare! Li conosci? 🐠',colori_mare:'I colori del mare! Belli vero? 🌊',animali_mont:'Gli animali di montagna! Li conosci? 🦅',stagioni:'Le quattro stagioni! Sai qual è? 🍂',lettere_scuola:'L\'alfabeto! Che lettera è? 🔤',numeri_scuola:'I numeri! Sei bravo a contare? 🔢',strumenti:'Gli strumenti di scuola! Li conosci? ✏️',pianeti:'Lo spazio! Sai la risposta? 🪐',alieni:'Il pianeta Zog! Conosci Zog? 👽'};
+
+let curWorld='',curGame=null,curQ=0,totalStars=0,answered=false,wrongShown=false;
+
+function goHome(){showScreen('home');setBubble('home','Ciao! Sono Bambu! 🐼<br>Scegli un mondo da esplorare!')}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function updateStars(){document.querySelectorAll('.star-count').forEach(el=>el.textContent=totalStars)}
+
+function openWorld(w){
+  curWorld=w;
+  const wd=WORLDS[w];
+  document.getElementById('world-title').textContent=wd.name;
+  document.getElementById('ws-stars').textContent=totalStars;
+  const grid=document.getElementById('games-grid');
+  grid.innerHTML='';
+  wd.games.forEach(g=>{
+    const btn=document.createElement('button');
+    btn.className='game-btn';
+    btn.style.borderColor=wd.color;
+    btn.innerHTML=`<span class="ico">${g.ico}</span>${g.name}`;
+    btn.onclick=()=>startGame(w,g.id);
+    grid.appendChild(btn);
+  });
+  setBubble('world',`Benvenuto in ${wd.name}! Che gioco scegli? 🎮`);
+  bounceBambu('world');
+  showScreen('world-screen');
+}
+
+function startGame(w,gid){
+  curWorld=w;curQ=0;answered=false;wrongShown=false;
+  curGame=WORLDS[w].games.find(g=>g.id===gid);
+  document.getElementById('game-title-bar').textContent=curGame.name;
+  setBubble('game',BAMBU_INTRO[gid]||'Sei pronto? Tocca la risposta giusta! 🎯');
+  bounceBambu('game');
+  renderQuestion();
+  showScreen('game-screen');
+}
+
+function backToWorld(){openWorld(curWorld)}
+
+function renderQuestion(){
+  if(!curGame||curQ>=curGame.questions.length)return;
+  const q=curGame.questions[curQ];
+  document.getElementById('game-question').textContent=q.q;
+  const grid=document.getElementById('options-grid');
+  grid.style.gridTemplateColumns='repeat(2,1fr)';
+  grid.innerHTML='';
+  answered=false;wrongShown=false;
+  q.opts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt-btn';
+    btn.innerHTML=`<span style="font-size:36px">${opt.e}</span><span class="lbl">${opt.l}</span>`;
+    btn.onclick=()=>checkAnswer(i,btn,q);
+    grid.appendChild(btn);
+  });
+}
+
+function checkAnswer(idx,btn,q){
+  if(answered)return;
+  if(idx===q.a){
+    answered=true;
+    btn.classList.add('correct');
+    totalStars++;
+    updateStars();
+    bounceBambu('game');
+    const msg=BAMBU_CORRECT[Math.floor(Math.random()*BAMBU_CORRECT.length)];
+    setBubble('game',msg);
+    setTimeout(()=>showCelebration(msg),600);
+  } else {
+    btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),400);
+    if(!wrongShown){
+      wrongShown=true;
+      shakeBambu('game');
+      setBubble('game',BAMBU_WRONG[Math.floor(Math.random()*BAMBU_WRONG.length)]);
+      setTimeout(()=>{
+        document.querySelectorAll('.opt-btn').forEach((b,i)=>{
+          if(i===q.a)b.style.outline='3px dashed #FFD93D';
+        });
+      },1000);
+    }
+  }
+}
+
+function showCelebration(msg){
+  const strs=totalStars>=10?'⭐⭐⭐':totalStars>=5?'⭐⭐':'⭐';
+  document.getElementById('cel-stars').textContent=strs;
+  document.getElementById('cel-msg').textContent=msg;
+  document.getElementById('cel-sub').textContent=`Stelle totali: ${totalStars} ⭐`;
+  document.getElementById('celebration').classList.add('show');
+  launchConfetti();
+}
+
+function nextQuestion(){
+  document.getElementById('celebration').classList.remove('show');
+  curQ++;
+  if(curQ>=curGame.questions.length){
+    setBubble('game','Hai finito tutto! Sei un campione! 🏆 Scegli un altro gioco!');
+    bounceBambu('game');
+    setTimeout(()=>backToWorld(),2000);
+  } else {
+    renderQuestion();
+    setBubble('game','Prossima domanda! Dai che ce la fai! 💪');
+  }
+}
+
+function setBubble(screen,text){const el=document.getElementById('bubble-'+screen);if(el)el.innerHTML=text}
+function bounceBambu(screen){const el=document.getElementById('bambu-'+screen);if(!el)return;el.classList.remove('bounce');void el.offsetWidth;el.classList.add('bounce')}
+function shakeBambu(screen){const el=document.getElementById('bambu-'+screen);if(!el)return;el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}
+
+function launchConfetti(){
+  const c=document.getElementById('confetti-c');
+  const ctx=c.getContext('2d');
+  c.width=window.innerWidth;c.height=window.innerHeight;
+  const colors=['#FF6B6B','#FFD93D','#6BCB77','#4D96FF','#FF6FC8','#A855F7'];
+  const pieces=[];
+  for(let i=0;i<80;i++)pieces.push({x:Math.random()*c.width,y:-20,r:Math.random()*8+4,color:colors[Math.floor(Math.random()*colors.length)],speed:Math.random()*4+2,rot:Math.random()*360,rotS:Math.random()*6-3});
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pieces.forEach(p=>{p.y+=p.speed;p.rot+=p.rotS;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);ctx.restore()});
+    frame++;
+    if(frame<90)requestAnimationFrame(draw);else ctx.clearRect(0,0,c.width,c.height);
+  }
+  draw();
+}
+</script>
+</body>
+</html>
