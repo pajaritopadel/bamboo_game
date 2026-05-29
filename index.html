@@ -13,73 +13,58 @@
 :root{--bg:#FFF9F0;--card:#fff;--shadow:0 4px 24px rgba(0,0,0,0.13)}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);min-height:100vh;min-height:-webkit-fill-available;overflow-x:hidden;-webkit-font-smoothing:antialiased;touch-action:manipulation}
 button{cursor:pointer;border:none;outline:none;font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;text-transform:uppercase}
-
 .screen{display:none;min-height:100vh;flex-direction:column;align-items:center}
 .screen.active{display:flex}
-
-/* TOP BAR */
 .top-bar{width:100%;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.09)}
-.top-title{font-size:32px;font-weight:900;color:#333}
-.stars-bar{display:flex;align-items:center;gap:4px;font-size:34px}
-.star-count{font-size:30px;font-weight:900;color:#FFD93D;margin-left:4px}
-.btn-back{background:none;font-size:44px;padding:4px 10px}
-
-/* BAMBU */
-.bambu-wrap{display:flex;flex-direction:column;align-items:center;margin:16px 0}
-.bambu{width:220px;height:220px;transition:transform .3s}
+.top-title{font-size:28px;font-weight:900;color:#333}
+.stars-bar{display:flex;align-items:center;gap:4px;font-size:30px}
+.star-count{font-size:26px;font-weight:900;color:#FFD93D;margin-left:4px}
+.btn-back{background:none;font-size:40px;padding:4px 10px}
+.btn-music{background:#FFD93D;border-radius:50%;width:52px;height:52px;font-size:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.bambu-wrap{display:flex;flex-direction:column;align-items:center;margin:12px 0}
+.bambu{width:200px;height:200px;transition:transform .3s}
 .bambu.bounce{animation:bounce .5s}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
 .bambu.shake{animation:shake .4s}
 @keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
-.bubble{background:#fff;border:4px solid #FFD93D;border-radius:24px;padding:16px 24px;max-width:420px;text-align:center;font-size:24px;font-weight:800;color:#333;margin-top:12px;position:relative;box-shadow:var(--shadow);line-height:1.4}
+.bubble{background:#fff;border:4px solid #FFD93D;border-radius:24px;padding:14px 22px;max-width:400px;text-align:center;font-size:22px;font-weight:800;color:#333;margin-top:10px;position:relative;box-shadow:var(--shadow);line-height:1.4}
 .bubble::before{content:'';position:absolute;top:-18px;left:50%;transform:translateX(-50%);border:9px solid transparent;border-bottom-color:#FFD93D}
-
-/* HOME */
 #home{background:linear-gradient(160deg,#e0f7ff 0%,#fff9f0 100%)}
-.home-title{font-size:52px;font-weight:900;color:#333;margin:20px 0 6px;text-align:center}
-.worlds-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:20px;width:100%;max-width:800px}
-.world-btn{background:var(--card);border-radius:28px;padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;box-shadow:var(--shadow);border:4px solid transparent;font-size:26px;font-weight:900;color:#333;transition:transform .2s}
+.home-title{font-size:44px;font-weight:900;color:#333;margin:16px 0 4px;text-align:center}
+.worlds-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:16px 20px;width:100%;max-width:820px}
+.world-btn{background:var(--card);border-radius:26px;padding:24px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:var(--shadow);border:4px solid transparent;font-size:22px;font-weight:900;color:#333;transition:transform .2s}
 .world-btn:active{transform:scale(.94)}
-.world-btn .ico{font-size:72px;line-height:1}
-
-/* WORLD */
+.world-btn .ico{font-size:64px;line-height:1}
 #world-screen{background:#fff}
-.world-title{font-size:36px;font-weight:900;margin:14px 0 0;color:#333}
-.games-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:20px;width:100%;max-width:780px}
-.game-btn{background:var(--card);border-radius:28px;padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;box-shadow:var(--shadow);border:4px solid transparent;font-size:26px;font-weight:900;color:#333;transition:transform .2s}
+.world-title{font-size:32px;font-weight:900;margin:12px 0 0;color:#333}
+.games-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:16px 20px;width:100%;max-width:780px}
+.game-btn{background:var(--card);border-radius:26px;padding:24px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:var(--shadow);border:4px solid transparent;font-size:22px;font-weight:900;color:#333;transition:transform .2s}
 .game-btn:active{transform:scale(.94)}
-.game-btn .ico{font-size:64px;line-height:1}
-
-/* GAME */
+.game-btn .ico{font-size:58px;line-height:1}
 #game-screen{background:var(--bg)}
-.game-area{width:100%;max-width:860px;padding:16px 20px;flex:1;display:flex;flex-direction:column;align-items:center;gap:16px}
-.game-question{font-size:30px;font-weight:900;color:#333;text-align:center;background:#fff;border-radius:22px;padding:20px 28px;box-shadow:var(--shadow);width:100%;line-height:1.4}
-.options-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;width:100%}
-.opt-btn{border-radius:24px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:var(--shadow);background:#fff;border:5px solid transparent;transition:transform .15s;font-weight:900;color:#333;font-family:inherit}
-.opt-btn .emo{font-size:64px;line-height:1}
-.opt-btn .lbl{font-size:24px;font-weight:900}
+.game-area{width:100%;max-width:860px;padding:12px 18px;flex:1;display:flex;flex-direction:column;align-items:center;gap:12px}
+.game-question{font-size:28px;font-weight:900;color:#333;text-align:center;background:#fff;border-radius:22px;padding:18px 24px;box-shadow:var(--shadow);width:100%;line-height:1.4}
+.options-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%}
+.opt-btn{border-radius:22px;padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:var(--shadow);background:#fff;border:5px solid transparent;transition:transform .15s;font-weight:900;color:#333;font-family:inherit}
+.opt-btn .emo{font-size:58px;line-height:1}
+.opt-btn .lbl{font-size:22px;font-weight:900}
 .opt-btn:active{transform:scale(.92)}
 .opt-btn.correct{border-color:#6BCB77;background:#f0fff4;animation:pop .4s}
 .opt-btn.wrong{border-color:#FF6B6B;background:#fff0f0;animation:wobble .4s}
 @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 @keyframes wobble{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
-
-/* CELEBRATION */
 .celebration{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);z-index:100;flex-direction:column}
 .celebration.show{display:flex}
-.cel-box{background:#fff;border-radius:32px;padding:40px 56px;text-align:center;box-shadow:0 10px 50px rgba(0,0,0,0.22)}
-.cel-stars{font-size:72px;letter-spacing:6px}
-.cel-msg{font-size:36px;font-weight:900;color:#333;margin:12px 0 6px}
-.cel-sub{font-size:24px;color:#888;margin-top:6px}
-.cel-btn{background:#FFD93D;border-radius:20px;padding:20px 48px;font-size:28px;font-weight:900;color:#333;margin-top:18px;box-shadow:0 4px 16px rgba(255,217,61,0.5)}
+.cel-box{background:#fff;border-radius:32px;padding:36px 52px;text-align:center;box-shadow:0 10px 50px rgba(0,0,0,0.22)}
+.cel-stars{font-size:68px;letter-spacing:6px}
+.cel-msg{font-size:32px;font-weight:900;color:#333;margin:10px 0 4px}
+.cel-sub{font-size:22px;color:#888;margin-top:4px}
+.cel-btn{background:#FFD93D;border-radius:20px;padding:18px 44px;font-size:26px;font-weight:900;color:#333;margin-top:16px;box-shadow:0 4px 16px rgba(255,217,61,0.5)}
 .confetti-c{position:fixed;pointer-events:none;top:0;left:0;width:100%;height:100%;z-index:99}
-
-/* iPad landscape */
 @media(min-width:1024px){
   .worlds-grid{grid-template-columns:repeat(4,1fr);max-width:1000px}
   .games-grid{grid-template-columns:repeat(3,1fr);max-width:900px}
   .options-grid{grid-template-columns:repeat(4,1fr)!important}
-  .bambu{width:200px;height:200px}
 }
 </style>
 </head>
@@ -89,32 +74,13 @@ button{cursor:pointer;border:none;outline:none;font-family:inherit;-webkit-tap-h
 <div id="home" class="screen active">
   <div class="top-bar">
     <div class="top-title">🌟 ESPLORA CON BAMBU!</div>
-    <div class="stars-bar">⭐<span class="star-count" id="total-stars">0</span></div>
-  </div>
-  <div class="bambu-wrap" style="margin-top:20px">
-    <div class="bambu" id="bambu-home">
-      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="60" cy="28" rx="34" ry="8" fill="#6BCB77"/>
-        <rect x="30" y="16" width="60" height="16" rx="4" fill="#4D96FF"/>
-        <polygon points="60,2 50,16 70,16" fill="#FF6B6B"/>
-        <circle cx="60" cy="4" r="4" fill="#FFD93D"/>
-        <circle cx="28" cy="44" r="14" fill="#333"/>
-        <circle cx="28" cy="44" r="9" fill="#fff"/>
-        <circle cx="92" cy="44" r="14" fill="#333"/>
-        <circle cx="92" cy="44" r="9" fill="#fff"/>
-        <ellipse cx="60" cy="60" rx="36" ry="34" fill="#fff" stroke="#333" stroke-width="2"/>
-        <ellipse cx="47" cy="54" rx="7" ry="8" fill="#333"/>
-        <ellipse cx="73" cy="54" rx="7" ry="8" fill="#333"/>
-        <circle cx="49" cy="52" r="2.5" fill="#fff"/>
-        <circle cx="75" cy="52" r="2.5" fill="#fff"/>
-        <ellipse cx="60" cy="66" rx="5" ry="3.5" fill="#FF6B6B"/>
-        <path d="M48 74 Q60 84 72 74" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <circle cx="38" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
-        <circle cx="82" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
-        <ellipse cx="60" cy="100" rx="26" ry="20" fill="#333"/>
-        <ellipse cx="60" cy="100" rx="16" ry="15" fill="#fff"/>
-      </svg>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="btn-music" id="btn-music" onclick="toggleMusic()">🎵</button>
+      <div class="stars-bar">⭐<span class="star-count" id="total-stars">0</span></div>
     </div>
+  </div>
+  <div class="bambu-wrap" style="margin-top:16px">
+    <div class="bambu" id="bambu-home">BAMBU_SVG</div>
     <div class="bubble" id="bubble-home">CIAO! SONO BAMBU! 🐼<br>SCEGLI UN MONDO!</div>
   </div>
   <div class="worlds-grid">
@@ -124,6 +90,8 @@ button{cursor:pointer;border:none;outline:none;font-family:inherit;-webkit-tap-h
     <button class="world-btn" onclick="openWorld('mare')" style="border-color:#4D96FF"><span class="ico">🌊</span>MARE</button>
     <button class="world-btn" onclick="openWorld('montagna')" style="border-color:#A855F7"><span class="ico">🏔️</span>MONTAGNA</button>
     <button class="world-btn" onclick="openWorld('scuola')" style="border-color:#FF6FC8"><span class="ico">🏫</span>SCUOLA</button>
+    <button class="world-btn" onclick="openWorld('corpo')" style="border-color:#FF6B6B"><span class="ico">🧒</span>CORPO UMANO</button>
+    <button class="world-btn" onclick="openWorld('animali')" style="border-color:#6BCB77"><span class="ico">🦁</span>ANIMALI</button>
     <button class="world-btn" onclick="openWorld('spazio')" style="border-color:#4D96FF;background:linear-gradient(135deg,#1a1a2e,#16213e)"><span class="ico">🪐</span><span style="color:#fff">PIANETA ZOG</span></button>
   </div>
 </div>
@@ -136,23 +104,7 @@ button{cursor:pointer;border:none;outline:none;font-family:inherit;-webkit-tap-h
     <div class="stars-bar">⭐<span class="star-count" id="ws-stars">0</span></div>
   </div>
   <div class="bambu-wrap">
-    <div class="bambu" id="bambu-world">
-      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="60" cy="28" rx="34" ry="8" fill="#6BCB77"/>
-        <rect x="30" y="16" width="60" height="16" rx="4" fill="#4D96FF"/>
-        <polygon points="60,2 50,16 70,16" fill="#FF6B6B"/>
-        <circle cx="60" cy="4" r="4" fill="#FFD93D"/>
-        <circle cx="28" cy="44" r="14" fill="#333"/><circle cx="28" cy="44" r="9" fill="#fff"/>
-        <circle cx="92" cy="44" r="14" fill="#333"/><circle cx="92" cy="44" r="9" fill="#fff"/>
-        <ellipse cx="60" cy="60" rx="36" ry="34" fill="#fff" stroke="#333" stroke-width="2"/>
-        <ellipse cx="47" cy="54" rx="7" ry="8" fill="#333"/><ellipse cx="73" cy="54" rx="7" ry="8" fill="#333"/>
-        <circle cx="49" cy="52" r="2.5" fill="#fff"/><circle cx="75" cy="52" r="2.5" fill="#fff"/>
-        <ellipse cx="60" cy="66" rx="5" ry="3.5" fill="#FF6B6B"/>
-        <path d="M48 74 Q60 84 72 74" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <circle cx="38" cy="68" r="7" fill="#FFB3BA" opacity=".6"/><circle cx="82" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
-        <ellipse cx="60" cy="100" rx="26" ry="20" fill="#333"/><ellipse cx="60" cy="100" rx="16" ry="15" fill="#fff"/>
-      </svg>
-    </div>
+    <div class="bambu" id="bambu-world">BAMBU_SVG</div>
     <div class="bubble" id="bubble-world">CHE GIOCO VUOI FARE?</div>
   </div>
   <div class="games-grid" id="games-grid"></div>
@@ -162,28 +114,12 @@ button{cursor:pointer;border:none;outline:none;font-family:inherit;-webkit-tap-h
 <div id="game-screen" class="screen">
   <div class="top-bar">
     <button class="btn-back" onclick="backToWorld()">⬅️</button>
-    <div style="font-size:26px;font-weight:900;color:#333" id="game-title-bar"></div>
+    <div style="font-size:22px;font-weight:900;color:#333" id="game-title-bar"></div>
     <div class="stars-bar">⭐<span class="star-count" id="gs-stars">0</span></div>
   </div>
   <div class="game-area">
     <div class="bambu-wrap">
-      <div class="bambu" id="bambu-game">
-        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="60" cy="28" rx="34" ry="8" fill="#6BCB77"/>
-          <rect x="30" y="16" width="60" height="16" rx="4" fill="#4D96FF"/>
-          <polygon points="60,2 50,16 70,16" fill="#FF6B6B"/>
-          <circle cx="60" cy="4" r="4" fill="#FFD93D"/>
-          <circle cx="28" cy="44" r="14" fill="#333"/><circle cx="28" cy="44" r="9" fill="#fff"/>
-          <circle cx="92" cy="44" r="14" fill="#333"/><circle cx="92" cy="44" r="9" fill="#fff"/>
-          <ellipse cx="60" cy="60" rx="36" ry="34" fill="#fff" stroke="#333" stroke-width="2"/>
-          <ellipse cx="47" cy="54" rx="7" ry="8" fill="#333"/><ellipse cx="73" cy="54" rx="7" ry="8" fill="#333"/>
-          <circle cx="49" cy="52" r="2.5" fill="#fff"/><circle cx="75" cy="52" r="2.5" fill="#fff"/>
-          <ellipse cx="60" cy="66" rx="5" ry="3.5" fill="#FF6B6B"/>
-          <path d="M48 74 Q60 84 72 74" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <circle cx="38" cy="68" r="7" fill="#FFB3BA" opacity=".6"/><circle cx="82" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
-          <ellipse cx="60" cy="100" rx="26" ry="20" fill="#333"/><ellipse cx="60" cy="100" rx="16" ry="15" fill="#fff"/>
-        </svg>
-      </div>
+      <div class="bambu" id="bambu-game">BAMBU_SVG</div>
       <div class="bubble" id="bubble-game">TOCCA LA RISPOSTA GIUSTA!</div>
     </div>
     <div class="game-question" id="game-question"></div>
@@ -203,21 +139,119 @@ button{cursor:pointer;border:none;outline:none;font-family:inherit;-webkit-tap-h
 </div>
 
 <script>
+// ── BAMBU SVG ──────────────────────────────────────────────
+const BSVG=`<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="60" cy="28" rx="34" ry="8" fill="#6BCB77"/>
+  <rect x="30" y="16" width="60" height="16" rx="4" fill="#4D96FF"/>
+  <polygon points="60,2 50,16 70,16" fill="#FF6B6B"/>
+  <circle cx="60" cy="4" r="4" fill="#FFD93D"/>
+  <circle cx="28" cy="44" r="14" fill="#333"/><circle cx="28" cy="44" r="9" fill="#fff"/>
+  <circle cx="92" cy="44" r="14" fill="#333"/><circle cx="92" cy="44" r="9" fill="#fff"/>
+  <ellipse cx="60" cy="60" rx="36" ry="34" fill="#fff" stroke="#333" stroke-width="2"/>
+  <ellipse cx="47" cy="54" rx="7" ry="8" fill="#333"/><ellipse cx="73" cy="54" rx="7" ry="8" fill="#333"/>
+  <circle cx="49" cy="52" r="2.5" fill="#fff"/><circle cx="75" cy="52" r="2.5" fill="#fff"/>
+  <ellipse cx="60" cy="66" rx="5" ry="3.5" fill="#FF6B6B"/>
+  <path d="M48 74 Q60 84 72 74" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="38" cy="68" r="7" fill="#FFB3BA" opacity=".6"/><circle cx="82" cy="68" r="7" fill="#FFB3BA" opacity=".6"/>
+  <ellipse cx="60" cy="100" rx="26" ry="20" fill="#333"/><ellipse cx="60" cy="100" rx="16" ry="15" fill="#fff"/>
+</svg>`;
+document.querySelectorAll('.bambu').forEach(el=>el.innerHTML=BSVG);
+
+// ── AUDIO ──────────────────────────────────────────────────
+let actx=null,musicOn=true,bgNodes=[];
+function getCtx(){if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();return actx;}
+
+function playTone(freq,type,start,dur,vol=0.3){
+  const ctx=getCtx(),o=ctx.createOscillator(),g=ctx.createGain();
+  o.connect(g);g.connect(ctx.destination);
+  o.type=type;o.frequency.setValueAtTime(freq,ctx.currentTime+start);
+  g.gain.setValueAtTime(vol,ctx.currentTime+start);
+  g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+start+dur);
+  o.start(ctx.currentTime+start);o.stop(ctx.currentTime+start+dur+0.05);
+}
+
+function soundCorrect(){
+  // melodia allegra
+  [[523,0],[659,0.12],[784,0.24],[1047,0.36]].forEach(([f,t])=>playTone(f,'sine',t,0.18,0.28));
+  // applausi simulati con rumore
+  for(let i=0;i<18;i++){
+    const ctx=getCtx(),buf=ctx.createBuffer(1,ctx.sampleRate*0.04,ctx.sampleRate);
+    const d=buf.getChannelData(0);for(let j=0;j<d.length;j++)d[j]=(Math.random()*2-1)*0.6;
+    const s=ctx.createBufferSource(),g=ctx.createGain();
+    s.buffer=buf;s.connect(g);g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.35,ctx.currentTime+i*0.055);
+    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*0.055+0.06);
+    s.start(ctx.currentTime+i*0.055);
+  }
+}
+
+function soundWrong(){
+  // tromba triste
+  [[220,0,0.18,0.4],[196,0.2,0.18,0.35],[174,0.42,0.3,0.25]].forEach(([f,t,d,v])=>playTone(f,'sawtooth',t,d,v));
+  playTone(155,'sawtooth',0.75,0.4,0.2);
+}
+
+function startBgMusic(){
+  if(!musicOn)return;
+  const ctx=getCtx();
+  // melodia semplice in loop
+  const notes=[523,587,659,698,784,698,659,587,523,494,523,0];
+  const dur=0.32;
+  function playLoop(){
+    if(!musicOn)return;
+    notes.forEach((f,i)=>{
+      if(f===0)return;
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.type='sine';o.frequency.value=f;
+      const t=ctx.currentTime+i*dur;
+      g.gain.setValueAtTime(0.07,t);
+      g.gain.exponentialRampToValueAtTime(0.001,t+dur*0.85);
+      o.start(t);o.stop(t+dur);
+    });
+    bgNodes._t=setTimeout(playLoop,notes.length*dur*1000);
+  }
+  playLoop();
+}
+
+function stopBgMusic(){clearTimeout(bgNodes._t);}
+
+function toggleMusic(){
+  musicOn=!musicOn;
+  document.getElementById('btn-music').textContent=musicOn?'🎵':'🔇';
+  if(musicOn)startBgMusic();else stopBgMusic();
+}
+
+// avvia musica al primo tocco
+document.addEventListener('touchstart',function init(){
+  document.removeEventListener('touchstart',init);
+  startBgMusic();
+},{once:true});
+document.addEventListener('click',function init(){
+  document.removeEventListener('click',init);
+  startBgMusic();
+},{once:true});
+
+// ── DATI ──────────────────────────────────────────────────
 const WORLDS={
   casa:{name:'🏠 CASA',color:'#FF6B6B',games:[
     {id:'forme',name:'LE FORME',ico:'🔷',questions:[
-      {q:'QUAL È IL CERCHIO? 🔴',opts:[{e:'🔴',l:'CERCHIO'},{e:'🔲',l:'QUADRATO'},{e:'🔺',l:'TRIANGOLO'},{e:'⬜',l:'RETTANGOLO'}],a:0},
+      {q:'QUAL È IL CERCHIO?',opts:[{e:'🔴',l:'CERCHIO'},{e:'🔲',l:'QUADRATO'},{e:'🔺',l:'TRIANGOLO'},{e:'⬜',l:'RETTANGOLO'}],a:0},
       {q:'QUAL È IL QUADRATO?',opts:[{e:'🔵',l:'CERCHIO'},{e:'🟥',l:'QUADRATO'},{e:'🔺',l:'TRIANGOLO'},{e:'💠',l:'ROMBO'}],a:1},
       {q:'QUAL È IL TRIANGOLO?',opts:[{e:'⬜',l:'QUADRATO'},{e:'🔵',l:'CERCHIO'},{e:'🔻',l:'TRIANGOLO'},{e:'⬛',l:'RETTANGOLO'}],a:2},
-      {q:'QUANTE STELLE VEDI? ⭐⭐⭐',opts:[{e:'2',l:'DUE'},{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'},{e:'1',l:'UNA'}],a:1},
       {q:'QUAL È LA FORMA OVALE?',opts:[{e:'🟦',l:'QUADRATO'},{e:'🥚',l:'OVALE'},{e:'🔺',l:'TRIANGOLO'},{e:'⭕',l:'CERCHIO'}],a:1},
+      {q:'QUANTE STELLE VEDI? ⭐⭐⭐',opts:[{e:'2',l:'DUE'},{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'},{e:'1',l:'UNA'}],a:1},
+      {q:'QUAL È IL ROMBO? 💠',opts:[{e:'🔵',l:'CERCHIO'},{e:'🟥',l:'QUADRATO'},{e:'💠',l:'ROMBO'},{e:'🔺',l:'TRIANGOLO'}],a:2},
+      {q:'QUANTI QUADRATI VEDI? 🟥🟥',opts:[{e:'1',l:'UNO'},{e:'3',l:'TRE'},{e:'2',l:'DUE'},{e:'4',l:'QUATTRO'}],a:2},
     ]},
     {id:'colori',name:'I COLORI',ico:'🎨',questions:[
-      {q:'TOCCA IL COLORE ROSSO! 🎨',opts:[{e:'🔴',l:'ROSSO'},{e:'🔵',l:'BLU'},{e:'🟡',l:'GIALLO'},{e:'🟢',l:'VERDE'}],a:0},
+      {q:'TOCCA IL COLORE ROSSO!',opts:[{e:'🔴',l:'ROSSO'},{e:'🔵',l:'BLU'},{e:'🟡',l:'GIALLO'},{e:'🟢',l:'VERDE'}],a:0},
       {q:'TOCCA IL COLORE BLU!',opts:[{e:'🟡',l:'GIALLO'},{e:'🟠',l:'ARANCIO'},{e:'🔵',l:'BLU'},{e:'🟣',l:'VIOLA'}],a:2},
       {q:'TOCCA IL COLORE GIALLO!',opts:[{e:'🔴',l:'ROSSO'},{e:'🟡',l:'GIALLO'},{e:'🟢',l:'VERDE'},{e:'⚫',l:'NERO'}],a:1},
       {q:'TOCCA IL COLORE VERDE!',opts:[{e:'🔵',l:'BLU'},{e:'🟣',l:'VIOLA'},{e:'🟡',l:'GIALLO'},{e:'🟢',l:'VERDE'}],a:3},
-      {q:'TOCCA IL COLORE ARANCIO! 🍊',opts:[{e:'🟠',l:'ARANCIO'},{e:'🔴',l:'ROSSO'},{e:'🟡',l:'GIALLO'},{e:'🟤',l:'MARRONE'}],a:0},
+      {q:'TOCCA IL COLORE ARANCIO!',opts:[{e:'🟠',l:'ARANCIO'},{e:'🔴',l:'ROSSO'},{e:'🟡',l:'GIALLO'},{e:'🟤',l:'MARRONE'}],a:0},
+      {q:'TOCCA IL COLORE VIOLA!',opts:[{e:'🔵',l:'BLU'},{e:'🟣',l:'VIOLA'},{e:'🔴',l:'ROSSO'},{e:'🟢',l:'VERDE'}],a:1},
+      {q:'TOCCA IL COLORE ROSA!',opts:[{e:'🔴',l:'ROSSO'},{e:'🟡',l:'GIALLO'},{e:'🩷',l:'ROSA'},{e:'🟠',l:'ARANCIO'}],a:2},
     ]},
     {id:'lettere',name:'LE LETTERE',ico:'🔤',questions:[
       {q:'QUALE LETTERA È LA A?',opts:[{e:'B',l:'B'},{e:'A',l:'A'},{e:'C',l:'C'},{e:'D',l:'D'}],a:1},
@@ -225,123 +259,214 @@ const WORLDS={
       {q:'QUALE LETTERA È LA M?',opts:[{e:'N',l:'N'},{e:'M',l:'M'},{e:'W',l:'W'},{e:'H',l:'H'}],a:1},
       {q:'QUALE LETTERA È LA S?',opts:[{e:'Z',l:'Z'},{e:'5',l:'5'},{e:'S',l:'S'},{e:'8',l:'8'}],a:2},
       {q:'QUALE LETTERA È LA T?',opts:[{e:'I',l:'I'},{e:'T',l:'T'},{e:'L',l:'L'},{e:'F',l:'F'}],a:1},
+      {q:'QUALE LETTERA È LA E?',opts:[{e:'F',l:'F'},{e:'L',l:'L'},{e:'E',l:'E'},{e:'P',l:'P'}],a:2},
+      {q:'QUALE LETTERA È LA R?',opts:[{e:'P',l:'P'},{e:'R',l:'R'},{e:'B',l:'B'},{e:'D',l:'D'}],a:1},
+    ]},
+    {id:'frasi_casa',name:'DOMANDE DI VITA',ico:'💬',questions:[
+      {q:'DOVE SI FA LA PIPÌ?',opts:[{e:'🛁',l:'NELLA VASCA'},{e:'🪣',l:'NEL SECCHIO'},{e:'🚽',l:'NEL VASINO'},{e:'🛏️',l:'NEL LETTO'}],a:2},
+      {q:'DOVE SI DORME?',opts:[{e:'🛋️',l:'SUL DIVANO'},{e:'🛏️',l:'NEL LETTO'},{e:'🪑',l:'SULLA SEDIA'},{e:'🚿',l:'NELLA DOCCIA'}],a:1},
+      {q:'DOVE SI MANGIA?',opts:[{e:'🛁',l:'IN BAGNO'},{e:'🛏️',l:'IN CAMERA'},{e:'🍽️',l:'A TAVOLA'},{e:'🚗',l:'IN MACCHINA'}],a:2},
+      {q:'COSA SI METTE PRIMA DI USCIRE?',opts:[{e:'🧸',l:'IL PUPAZZO'},{e:'👟',l:'LE SCARPE'},{e:'🍕',l:'LA PIZZA'},{e:'📺',l:'LA TV'}],a:1},
+      {q:'DOVE SI LAVA LE MANI?',opts:[{e:'🪟',l:'ALLA FINESTRA'},{e:'🚪',l:'ALLA PORTA'},{e:'🚿',l:'AL LAVANDINO'},{e:'🛋️',l:'SUL DIVANO'}],a:2},
+      {q:'DOVE SI METTONO I VESTITI SPORCHI?',opts:[{e:'🍽️',l:'SUL PIATTO'},{e:'🪣',l:'NEL CESTO'},{e:'🛏️',l:'SUL LETTO'},{e:'🪟',l:'ALLA FINESTRA'}],a:1},
+      {q:'COSA SI FA PRIMA DI ANDARE A LETTO?',opts:[{e:'🍕',l:'SI MANGIA LA PIZZA'},{e:'🚗',l:'SI VA IN MACCHINA'},{e:'🦷',l:'CI SI LAVA I DENTI'},{e:'📺',l:'SI GUARDA LA TV'}],a:2},
     ]},
   ]},
+
   fattoria:{name:'🐄 FATTORIA',color:'#6BCB77',games:[
-    {id:'animali',name:'GLI ANIMALI',ico:'🐮',questions:[
-      {q:'CHI FA MUU? 🐮',opts:[{e:'🐮',l:'MUCCA'},{e:'🐷',l:'MAIALE'},{e:'🐔',l:'GALLINA'},{e:'🐑',l:'PECORA'}],a:0},
-      {q:'CHI FA OINK? 🐷',opts:[{e:'🐮',l:'MUCCA'},{e:'🐔',l:'GALLINA'},{e:'🐴',l:'CAVALLO'},{e:'🐷',l:'MAIALE'}],a:3},
+    {id:'animali_f',name:'GLI ANIMALI',ico:'🐮',questions:[
+      {q:'CHI FA MUU?',opts:[{e:'🐮',l:'MUCCA'},{e:'🐷',l:'MAIALE'},{e:'🐔',l:'GALLINA'},{e:'🐑',l:'PECORA'}],a:0},
+      {q:'CHI FA OINK?',opts:[{e:'🐮',l:'MUCCA'},{e:'🐔',l:'GALLINA'},{e:'🐴',l:'CAVALLO'},{e:'🐷',l:'MAIALE'}],a:3},
       {q:'CHI FA CHICCHIRICHÌ?',opts:[{e:'🦆',l:'ANATRA'},{e:'🐔',l:'GALLO'},{e:'🐮',l:'MUCCA'},{e:'🐑',l:'PECORA'}],a:1},
       {q:'CHI FA BEE BEE?',opts:[{e:'🐑',l:'PECORA'},{e:'🐷',l:'MAIALE'},{e:'🐂',l:'TORO'},{e:'🐔',l:'GALLINA'}],a:0},
-      {q:'CHI FA I-OH? 🫏',opts:[{e:'🐴',l:'CAVALLO'},{e:'🫏',l:'ASINO'},{e:'🐄',l:'MUCCA'},{e:'🐐',l:'CAPRA'}],a:1},
+      {q:'CHI FA I-OH?',opts:[{e:'🐴',l:'CAVALLO'},{e:'🫏',l:'ASINO'},{e:'🐄',l:'MUCCA'},{e:'🐐',l:'CAPRA'}],a:1},
+      {q:'DA DOVE VIENE IL LATTE?',opts:[{e:'🐔',l:'DALLA GALLINA'},{e:'🐮',l:'DALLA MUCCA'},{e:'🐷',l:'DAL MAIALE'},{e:'🐑',l:'DALLA PECORA'}],a:1},
+      {q:'CHI FA LE UOVA?',opts:[{e:'🐄',l:'LA MUCCA'},{e:'🐑',l:'LA PECORA'},{e:'🐔',l:'LA GALLINA'},{e:'🐴',l:'IL CAVALLO'}],a:2},
     ]},
     {id:'numeri',name:'CONTA!',ico:'🔢',questions:[
       {q:'QUANTE MELE VEDI? 🍎🍎',opts:[{e:'1',l:'UNA'},{e:'2',l:'DUE'},{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'}],a:1},
       {q:'QUANTE GALLINE? 🐔🐔🐔',opts:[{e:'2',l:'DUE'},{e:'4',l:'QUATTRO'},{e:'3',l:'TRE'},{e:'1',l:'UNA'}],a:2},
       {q:'QUANTE UOVA? 🥚🥚🥚🥚',opts:[{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'},{e:'5',l:'CINQUE'},{e:'2',l:'DUE'}],a:1},
-      {q:'QUANTI FIORI? 🌸',opts:[{e:'2',l:'DUE'},{e:'1',l:'UNO'},{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'}],a:1},
       {q:'QUANTI MAIALI? 🐷🐷🐷🐷🐷',opts:[{e:'4',l:'QUATTRO'},{e:'6',l:'SEI'},{e:'5',l:'CINQUE'},{e:'3',l:'TRE'}],a:2},
+      {q:'QUANTE PECORE? 🐑🐑',opts:[{e:'3',l:'TRE'},{e:'1',l:'UNA'},{e:'2',l:'DUE'},{e:'4',l:'QUATTRO'}],a:2},
+      {q:'QUANTE CAROTE? 🥕🥕🥕',opts:[{e:'2',l:'DUE'},{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'},{e:'1',l:'UNA'}],a:1},
     ]},
     {id:'verdure',name:'LE VERDURE',ico:'🥕',questions:[
-      {q:'QUAL È LA CAROTA? 🥕',opts:[{e:'🥕',l:'CAROTA'},{e:'🍅',l:'POMODORO'},{e:'🥦',l:'BROCCOLO'},{e:'🌽',l:'MAIS'}],a:0},
+      {q:'QUAL È LA CAROTA?',opts:[{e:'🥕',l:'CAROTA'},{e:'🍅',l:'POMODORO'},{e:'🥦',l:'BROCCOLO'},{e:'🌽',l:'MAIS'}],a:0},
       {q:'QUAL È IL POMODORO?',opts:[{e:'🍋',l:'LIMONE'},{e:'🍊',l:'ARANCIO'},{e:'🍅',l:'POMODORO'},{e:'🍎',l:'MELA'}],a:2},
       {q:'QUAL È IL MAIS?',opts:[{e:'🥕',l:'CAROTA'},{e:'🌽',l:'MAIS'},{e:'🥦',l:'BROCCOLO'},{e:'🧅',l:'CIPOLLA'}],a:1},
       {q:'DI CHE COLORE È LA CAROTA?',opts:[{e:'🔴',l:'ROSSO'},{e:'🟢',l:'VERDE'},{e:'🟠',l:'ARANCIO'},{e:'🟡',l:'GIALLO'}],a:2},
       {q:'DI CHE COLORE È IL BROCCOLO?',opts:[{e:'🟠',l:'ARANCIO'},{e:'🟢',l:'VERDE'},{e:'🔴',l:'ROSSO'},{e:'🟡',l:'GIALLO'}],a:1},
+      {q:'DOVE CRESCONO LE VERDURE?',opts:[{e:'🌊',l:'NEL MARE'},{e:'🌱',l:'NELLA TERRA'},{e:'☁️',l:'NEL CIELO'},{e:'🏠',l:'IN CASA'}],a:1},
+    ]},
+    {id:'frasi_fattoria',name:'DOMANDE FATTORIA',ico:'💬',questions:[
+      {q:'DOVE DORMONO LE MUCCHE?',opts:[{e:'🏠',l:'IN CASA'},{e:'🏫',l:'A SCUOLA'},{e:'🏚️',l:'NELLA STALLA'},{e:'🌊',l:'IN MARE'}],a:2},
+      {q:'COSA DANNO LE API?',opts:[{e:'🧂',l:'IL SALE'},{e:'🍯',l:'IL MIELE'},{e:'🥛',l:'IL LATTE'},{e:'🧀',l:'IL FORMAGGIO'}],a:1},
+      {q:'COSA MANGIA IL CAVALLO?',opts:[{e:'🍕',l:'LA PIZZA'},{e:'🐟',l:'IL PESCE'},{e:'🌿',l:'L\'ERBA E IL FIENO'},{e:'🍦',l:'IL GELATO'}],a:2},
+      {q:'DA DOVE VIENE IL FORMAGGIO?',opts:[{e:'🐷',l:'DAL MAIALE'},{e:'🥚',l:'DALL\'UOVO'},{e:'🐮',l:'DAL LATTE DELLA MUCCA'},{e:'🌽',l:'DAL MAIS'}],a:2},
     ]},
   ]},
+
   parco:{name:'🌳 PARCO',color:'#FFD93D',games:[
     {id:'insetti',name:'GLI INSETTI',ico:'🦋',questions:[
-      {q:'QUALE INSETTO HA LE ALI COLORATE? 🦋',opts:[{e:'🐜',l:'FORMICA'},{e:'🦋',l:'FARFALLA'},{e:'🐛',l:'BRUCO'},{e:'🪲',l:'COLEOTTERO'}],a:1},
-      {q:'CHI VIVE NELL\'ALVEARE? 🍯',opts:[{e:'🦗',l:'GRILLO'},{e:'🐛',l:'BRUCO'},{e:'🐝',l:'APE'},{e:'🐞',l:'COCCINELLA'}],a:2},
-      {q:'QUANTI PUNTI HA LA COCCINELLA? ⚫⚫⚫⚫⚫⚫⚫',opts:[{e:'5',l:'CINQUE'},{e:'6',l:'SEI'},{e:'7',l:'SETTE'},{e:'8',l:'OTTO'}],a:2},
-      {q:'COME SI CHIAMA QUESTO? 🐛',opts:[{e:'APE',l:'🐝'},{e:'BRUCO',l:'🐛'},{e:'LUMACA',l:'🐌'},{e:'VERME',l:'🪱'}],a:1},
-      {q:'CHI SALTA NELL\'ERBA? 🌿',opts:[{e:'🦋',l:'FARFALLA'},{e:'🐜',l:'FORMICA'},{e:'🦗',l:'GRILLO'},{e:'🐛',l:'BRUCO'}],a:2},
+      {q:'QUALE INSETTO HA LE ALI COLORATE?',opts:[{e:'🐜',l:'FORMICA'},{e:'🦋',l:'FARFALLA'},{e:'🐛',l:'BRUCO'},{e:'🪲',l:'COLEOTTERO'}],a:1},
+      {q:'CHI VIVE NELL\'ALVEARE?',opts:[{e:'🦗',l:'GRILLO'},{e:'🐛',l:'BRUCO'},{e:'🐝',l:'APE'},{e:'🐞',l:'COCCINELLA'}],a:2},
+      {q:'CHI SALTA NELL\'ERBA?',opts:[{e:'🦋',l:'FARFALLA'},{e:'🐜',l:'FORMICA'},{e:'🦗',l:'GRILLO'},{e:'🐛',l:'BRUCO'}],a:2},
+      {q:'DI CHE COLORE È LA COCCINELLA?',opts:[{e:'🟡',l:'GIALLA'},{e:'🔵',l:'BLU'},{e:'🔴',l:'ROSSA CON PUNTI NERI'},{e:'🟢',l:'VERDE'}],a:2},
+      {q:'COSA PRODUCE L\'APE?',opts:[{e:'🥛',l:'LATTE'},{e:'🍯',l:'MIELE'},{e:'🧀',l:'FORMAGGIO'},{e:'🍎',l:'MELE'}],a:1},
+      {q:'COME SI CHIAMA IL BRUCO DOPO LA TRASFORMAZIONE?',opts:[{e:'🐛',l:'BRUCO'},{e:'🐜',l:'FORMICA'},{e:'🦋',l:'FARFALLA'},{e:'🐝',l:'APE'}],a:2},
     ]},
-    {id:'alberi',name:'LA NATURA',ico:'🌸',questions:[
+    {id:'natura',name:'LA NATURA',ico:'🌸',questions:[
       {q:'DI CHE COLORE SONO LE FOGLIE IN PRIMAVERA?',opts:[{e:'🟡',l:'GIALLE'},{e:'🟢',l:'VERDI'},{e:'🔴',l:'ROSSE'},{e:'🟤',l:'MARRONI'}],a:1},
       {q:'COSA PRODUCE L\'ALBERO DI MELE?',opts:[{e:'🍊',l:'ARANCE'},{e:'🍋',l:'LIMONI'},{e:'🍎',l:'MELE'},{e:'🍇',l:'UVA'}],a:2},
-      {q:'COME SI CHIAMA QUESTO? 🌸',opts:[{e:'FOGLIA',l:'🍃'},{e:'FIORE',l:'🌸'},{e:'RADICE',l:'🌱'},{e:'FRUTTO',l:'🍎'}],a:1},
-      {q:'DOV\'È IL SOLE? ☀️',opts:[{e:'🌍',l:'SOTTO LA TERRA'},{e:'🌊',l:'NEL MARE'},{e:'☁️',l:'DIETRO LE NUVOLE'},{e:'☀️',l:'IN CIELO'}],a:3},
+      {q:'DOV\'È IL SOLE?',opts:[{e:'🌍',l:'SOTTO LA TERRA'},{e:'🌊',l:'NEL MARE'},{e:'☁️',l:'DIETRO LE NUVOLE'},{e:'☀️',l:'IN CIELO'}],a:3},
       {q:'COSA FA LA PIOGGIA?',opts:[{e:'🌱',l:'FA CRESCERE LE PIANTE'},{e:'🔥',l:'FA FUOCO'},{e:'❄️',l:'FA LA NEVE'},{e:'💨',l:'FA IL VENTO'}],a:0},
+      {q:'DI CHE COLORE È L\'ERBA?',opts:[{e:'🔵',l:'BLU'},{e:'🔴',l:'ROSSA'},{e:'🟢',l:'VERDE'},{e:'🟡',l:'GIALLA'}],a:2},
+      {q:'COSA CADONO DAGLI ALBERI IN AUTUNNO?',opts:[{e:'🍎',l:'LE MELE'},{e:'🍂',l:'LE FOGLIE'},{e:'❄️',l:'LA NEVE'},{e:'🌸',l:'I FIORI'}],a:1},
     ]},
   ]},
+
   mare:{name:'🌊 MARE',color:'#4D96FF',games:[
-    {id:'pesci',name:'I PESCI',ico:'🐠',questions:[
-      {q:'QUALE ANIMALE HA 8 TENTACOLI? 🐙',opts:[{e:'🦑',l:'CALAMARO'},{e:'🐙',l:'POLPO'},{e:'🦀',l:'GRANCHIO'},{e:'🐡',l:'PESCE PALLA'}],a:1},
+    {id:'pesci',name:'GLI ANIMALI DEL MARE',ico:'🐠',questions:[
+      {q:'QUALE ANIMALE HA 8 TENTACOLI?',opts:[{e:'🦑',l:'CALAMARO'},{e:'🐙',l:'POLPO'},{e:'🦀',l:'GRANCHIO'},{e:'🐡',l:'PESCE PALLA'}],a:1},
       {q:'CHI NUOTA VELOCISSIMO?',opts:[{e:'🐢',l:'TARTARUGA'},{e:'🦀',l:'GRANCHIO'},{e:'🐬',l:'DELFINO'},{e:'🐙',l:'POLPO'}],a:2},
-      {q:'DI CHE COLORE È IL MARE?',opts:[{e:'🔴',l:'ROSSO'},{e:'🟡',l:'GIALLO'},{e:'🔵',l:'BLU'},{e:'🟢',l:'VERDE'}],a:2},
-      {q:'COME SI CHIAMA QUESTO? 🐚',opts:[{e:'PIETRA',l:'🪨'},{e:'CONCHIGLIA',l:'🐚'},{e:'CORALLO',l:'🪸'},{e:'STELLA',l:'⭐'}],a:1},
       {q:'CHI VOLA SOPRA IL MARE?',opts:[{e:'🐬',l:'DELFINO'},{e:'🦈',l:'SQUALO'},{e:'🐙',l:'POLPO'},{e:'🐦',l:'GABBIANO'}],a:3},
+      {q:'DI CHE COLORE È IL MARE?',opts:[{e:'🔴',l:'ROSSO'},{e:'🟡',l:'GIALLO'},{e:'🔵',l:'BLU'},{e:'🟢',l:'VERDE'}],a:2},
+      {q:'CHI HA LE CHELE?',opts:[{e:'🐬',l:'DELFINO'},{e:'🦀',l:'GRANCHIO'},{e:'🐠',l:'PESCE'},{e:'🐢',l:'TARTARUGA'}],a:1},
+      {q:'DOVE VIVE IL PESCE?',opts:[{e:'🌳',l:'NEL BOSCO'},{e:'🏠',l:'IN CASA'},{e:'🌊',l:'NEL MARE'},{e:'🏔️',l:'IN MONTAGNA'}],a:2},
+      {q:'COME SI CHIAMA QUESTO? 🐚',opts:[{e:'PIETRA',l:'🪨'},{e:'CONCHIGLIA',l:'🐚'},{e:'CORALLO',l:'🪸'},{e:'STELLA',l:'⭐'}],a:1},
     ]},
-    {id:'colori_mare',name:'I COLORI DEL MARE',ico:'🎨',questions:[
-      {q:'DI CHE COLORE È LA STELLA MARINA?',opts:[{e:'🔵',l:'BLU'},{e:'🟠',l:'ARANCIO/ROSSO'},{e:'🟢',l:'VERDE'},{e:'🟡',l:'GIALLO'}],a:1},
-      {q:'DI CHE COLORE È IL POLPO?',opts:[{e:'🟣',l:'VIOLA/ROSSO'},{e:'🟡',l:'GIALLO'},{e:'🟢',l:'VERDE'},{e:'⬛',l:'NERO'}],a:0},
-      {q:'DI CHE COLORE È LA SABBIA?',opts:[{e:'🔵',l:'BLU'},{e:'🟡',l:'GIALLA'},{e:'🔴',l:'ROSSA'},{e:'🟢',l:'VERDE'}],a:1},
-      {q:'DI CHE COLORE È LA TARTARUGA MARINA?',opts:[{e:'🔴',l:'ROSSA'},{e:'🟡',l:'GIALLA'},{e:'🟢',l:'VERDE'},{e:'🔵',l:'BLU'}],a:2},
-      {q:'DI CHE COLORE È IL DELFINO?',opts:[{e:'🟢',l:'VERDE'},{e:'🔴',l:'ROSSO'},{e:'⬜',l:'GRIGIO/BIANCO'},{e:'🟡',l:'GIALLO'}],a:2},
+    {id:'frasi_mare',name:'DOMANDE MARE',ico:'💬',questions:[
+      {q:'CON COSA SI NUOTA?',opts:[{e:'🎿',l:'CON GLI SCI'},{e:'🏊',l:'CON LE BRACCIA E LE GAMBE'},{e:'🚗',l:'CON LA MACCHINA'},{e:'✏️',l:'CON LA MATITA'}],a:1},
+      {q:'COSA SI METTE PER PROTEGGERSI DAL SOLE?',opts:[{e:'🧤',l:'I GUANTI'},{e:'🧣',l:'LA SCIARPA'},{e:'🧴',l:'LA CREMA SOLARE'},{e:'🥾',l:'GLI STIVALI'}],a:2},
+      {q:'COSA SI COSTRUISCE SULLA SABBIA?',opts:[{e:'🏰',l:'UN CASTELLO DI SABBIA'},{e:'🍕',l:'UNA PIZZA'},{e:'🚗',l:'UNA MACCHINA'},{e:'🏫',l:'UNA SCUOLA'}],a:0},
     ]},
   ]},
+
   montagna:{name:'🏔️ MONTAGNA',color:'#A855F7',games:[
     {id:'animali_mont',name:'GLI ANIMALI',ico:'🦅',questions:[
-      {q:'CHI VOLA ALTO SULLE MONTAGNE? 🦅',opts:[{e:'🐟',l:'PESCE'},{e:'🦅',l:'AQUILA'},{e:'🐢',l:'TARTARUGA'},{e:'🐄',l:'MUCCA'}],a:1},
-      {q:'QUALE ANIMALE HA IL CORNO?',opts:[{e:'🦊',l:'VOLPE'},{e:'🐻',l:'ORSO'},{e:'🐐',l:'CAPRA DI MONTAGNA'},{e:'🐰',l:'CONIGLIO'}],a:2},
-      {q:'DI CHE COLORE È LA NEVE? ❄️',opts:[{e:'⬜',l:'BIANCA'},{e:'🔵',l:'BLU'},{e:'🟡',l:'GIALLA'},{e:'🩶',l:'GRIGIA'}],a:0},
+      {q:'CHI VOLA ALTO SULLE MONTAGNE?',opts:[{e:'🐟',l:'PESCE'},{e:'🦅',l:'AQUILA'},{e:'🐢',l:'TARTARUGA'},{e:'🐄',l:'MUCCA'}],a:1},
       {q:'CHI DORME TUTTO L\'INVERNO?',opts:[{e:'🦅',l:'AQUILA'},{e:'🐺',l:'LUPO'},{e:'🐻',l:'ORSO'},{e:'🐐',l:'CAPRA'}],a:2},
+      {q:'DI CHE COLORE È LA NEVE?',opts:[{e:'⬜',l:'BIANCA'},{e:'🔵',l:'BLU'},{e:'🟡',l:'GIALLA'},{e:'🩶',l:'GRIGIA'}],a:0},
       {q:'COSA SI METTE AI PIEDI SULLA NEVE?',opts:[{e:'🩴',l:'SANDALI'},{e:'🎿',l:'SCI'},{e:'👡',l:'TACCHI'},{e:'🩰',l:'SCARPETTE'}],a:1},
+      {q:'QUALE ANIMALE HA IL CORNO?',opts:[{e:'🦊',l:'VOLPE'},{e:'🐻',l:'ORSO'},{e:'🐐',l:'CAPRA DI MONTAGNA'},{e:'🐰',l:'CONIGLIO'}],a:2},
+      {q:'DI CHE COLORE È L\'ORSO?',opts:[{e:'🟢',l:'VERDE'},{e:'🟤',l:'MARRONE'},{e:'🔵',l:'BLU'},{e:'🟡',l:'GIALLO'}],a:1},
     ]},
     {id:'stagioni',name:'LE STAGIONI',ico:'🍂',questions:[
-      {q:'IN QUALE STAGIONE CADE LA NEVE? ❄️',opts:[{e:'🌸',l:'PRIMAVERA'},{e:'☀️',l:'ESTATE'},{e:'🍂',l:'AUTUNNO'},{e:'❄️',l:'INVERNO'}],a:3},
+      {q:'IN QUALE STAGIONE CADE LA NEVE?',opts:[{e:'🌸',l:'PRIMAVERA'},{e:'☀️',l:'ESTATE'},{e:'🍂',l:'AUTUNNO'},{e:'❄️',l:'INVERNO'}],a:3},
       {q:'IN QUALE STAGIONE FIORISCONO I FIORI?',opts:[{e:'❄️',l:'INVERNO'},{e:'🌸',l:'PRIMAVERA'},{e:'🍂',l:'AUTUNNO'},{e:'☀️',l:'ESTATE'}],a:1},
       {q:'QUANDO FA PIÙ CALDO?',opts:[{e:'❄️',l:'INVERNO'},{e:'🌸',l:'PRIMAVERA'},{e:'☀️',l:'ESTATE'},{e:'🍂',l:'AUTUNNO'}],a:2},
       {q:'IN QUALE STAGIONE CADONO LE FOGLIE?',opts:[{e:'🍂',l:'AUTUNNO'},{e:'🌸',l:'PRIMAVERA'},{e:'☀️',l:'ESTATE'},{e:'❄️',l:'INVERNO'}],a:0},
       {q:'QUANTE STAGIONI CI SONO IN UN ANNO?',opts:[{e:'2',l:'DUE'},{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'},{e:'5',l:'CINQUE'}],a:2},
     ]},
   ]},
+
   scuola:{name:'🏫 SCUOLA',color:'#FF6FC8',games:[
-    {id:'lettere_scuola',name:'L\'ALFABETO',ico:'🔤',questions:[
+    {id:'alfabeto',name:'L\'ALFABETO',ico:'🔤',questions:[
       {q:'QUALE LETTERA VIENE PRIMA? A _ C',opts:[{e:'Z',l:'Z'},{e:'B',l:'B'},{e:'D',l:'D'},{e:'E',l:'E'}],a:1},
       {q:'CHE LETTERA INIZIA MELA 🍎?',opts:[{e:'A',l:'A'},{e:'M',l:'M'},{e:'N',l:'N'},{e:'P',l:'P'}],a:1},
       {q:'CHE LETTERA INIZIA SOLE ☀️?',opts:[{e:'S',l:'S'},{e:'C',l:'C'},{e:'Z',l:'Z'},{e:'T',l:'T'}],a:0},
       {q:'CHE LETTERA INIZIA GATTO 🐱?',opts:[{e:'C',l:'C'},{e:'K',l:'K'},{e:'G',l:'G'},{e:'J',l:'J'}],a:2},
       {q:'CHE LETTERA INIZIA PAPÀ 👨?',opts:[{e:'B',l:'B'},{e:'D',l:'D'},{e:'P',l:'P'},{e:'F',l:'F'}],a:2},
+      {q:'CHE LETTERA INIZIA LUNA 🌙?',opts:[{e:'M',l:'M'},{e:'L',l:'L'},{e:'N',l:'N'},{e:'R',l:'R'}],a:1},
+      {q:'CHE LETTERA INIZIA BANANA 🍌?',opts:[{e:'P',l:'P'},{e:'D',l:'D'},{e:'B',l:'B'},{e:'G',l:'G'}],a:2},
     ]},
-    {id:'numeri_scuola',name:'I NUMERI',ico:'🔢',questions:[
+    {id:'numeri_s',name:'I NUMERI',ico:'🔢',questions:[
       {q:'QUALE NUMERO VIENE DOPO IL 2?',opts:[{e:'1',l:'1'},{e:'4',l:'4'},{e:'3',l:'3'},{e:'5',l:'5'}],a:2},
       {q:'QUALE NUMERO VIENE DOPO IL 4?',opts:[{e:'3',l:'3'},{e:'5',l:'5'},{e:'6',l:'6'},{e:'2',l:'2'}],a:1},
       {q:'QUANTO FA 1 + 1?',opts:[{e:'3',l:'3'},{e:'1',l:'1'},{e:'2',l:'2'},{e:'4',l:'4'}],a:2},
       {q:'QUALE NUMERO È IL PIÙ GRANDE?',opts:[{e:'2',l:'2'},{e:'5',l:'5'},{e:'3',l:'3'},{e:'1',l:'1'}],a:1},
       {q:'QUANTO FA 2 + 1?',opts:[{e:'4',l:'4'},{e:'2',l:'2'},{e:'5',l:'5'},{e:'3',l:'3'}],a:3},
+      {q:'QUANTO FA 3 + 1?',opts:[{e:'3',l:'3'},{e:'5',l:'5'},{e:'4',l:'4'},{e:'6',l:'6'}],a:2},
+      {q:'QUALE NUMERO VIENE PRIMA DEL 3?',opts:[{e:'4',l:'4'},{e:'1',l:'1'},{e:'2',l:'2'},{e:'5',l:'5'}],a:2},
     ]},
-    {id:'strumenti',name:'GLI STRUMENTI',ico:'✏️',questions:[
-      {q:'CON COSA SI DISEGNA? ✏️',opts:[{e:'✏️',l:'MATITA'},{e:'✂️',l:'FORBICI'},{e:'📏',l:'RIGHELLO'},{e:'🗑️',l:'CESTINO'}],a:0},
-      {q:'CON COSA SI TAGLIA?',opts:[{e:'✏️',l:'MATITA'},{e:'✂️',l:'FORBICI'},{e:'📚',l:'LIBRO'},{e:'🖍️',l:'PENNARELLO'}],a:1},
-      {q:'DOVE SI SCRIVE A SCUOLA?',opts:[{e:'🛁',l:'VASCA'},{e:'🪟',l:'FINESTRA'},{e:'📖',l:'QUADERNO'},{e:'🪑',l:'SEDIA'}],a:2},
-      {q:'DI CHE COLORE È LA LAVAGNA?',opts:[{e:'⬛',l:'NERA/VERDE'},{e:'⬜',l:'BIANCA'},{e:'🟡',l:'GIALLA'},{e:'🔴',l:'ROSSA'}],a:0},
-      {q:'COSA SI METTE NELLO ZAINO?',opts:[{e:'🍕',l:'PIZZA'},{e:'📚',l:'LIBRI'},{e:'🚗',l:'MACCHINA'},{e:'🛏️',l:'LETTO'}],a:1},
+    {id:'frasi_scuola',name:'DOMANDE SCUOLA',ico:'💬',questions:[
+      {q:'CON COSA SI DISEGNA?',opts:[{e:'✂️',l:'LE FORBICI'},{e:'✏️',l:'LA MATITA'},{e:'📏',l:'IL RIGHELLO'},{e:'🗑️',l:'IL CESTINO'}],a:1},
+      {q:'CON COSA SI TAGLIA LA CARTA?',opts:[{e:'✏️',l:'LA MATITA'},{e:'✂️',l:'LE FORBICI'},{e:'📚',l:'IL LIBRO'},{e:'🖍️',l:'IL PENNARELLO'}],a:1},
+      {q:'DOVE SI SCRIVE?',opts:[{e:'🛁',l:'NELLA VASCA'},{e:'🪟',l:'ALLA FINESTRA'},{e:'📖',l:'SUL QUADERNO'},{e:'🪑',l:'SULLA SEDIA'}],a:2},
+      {q:'COSA SI FA A SCUOLA?',opts:[{e:'🏊',l:'SI NUOTA'},{e:'📚',l:'SI IMPARA'},{e:'🛌',l:'SI DORME'},{e:'🍳',l:'SI CUCINA'}],a:1},
+      {q:'CHI INSEGNA A SCUOLA?',opts:[{e:'👨‍⚕️',l:'IL DOTTORE'},{e:'👩‍🍳',l:'LA CUOCA'},{e:'👩‍🏫',l:'LA MAESTRA'},{e:'👮',l:'IL POLIZIOTTO'}],a:2},
     ]},
   ]},
+
+  corpo:{name:'🧒 CORPO UMANO',color:'#FF6B6B',games:[
+    {id:'viso',name:'IL VISO',ico:'😊',questions:[
+      {q:'CON COSA SI VEDE?',opts:[{e:'👂',l:'LE ORECCHIE'},{e:'👃',l:'IL NASO'},{e:'👁️',l:'GLI OCCHI'},{e:'👅',l:'LA BOCCA'}],a:2},
+      {q:'CON COSA SI SENTE?',opts:[{e:'👁️',l:'GLI OCCHI'},{e:'👂',l:'LE ORECCHIE'},{e:'👃',l:'IL NASO'},{e:'👅',l:'LA BOCCA'}],a:1},
+      {q:'CON COSA SI ANNUSA?',opts:[{e:'👅',l:'LA BOCCA'},{e:'👁️',l:'GLI OCCHI'},{e:'👂',l:'LE ORECCHIE'},{e:'👃',l:'IL NASO'}],a:3},
+      {q:'CON COSA SI MANGIA?',opts:[{e:'👃',l:'IL NASO'},{e:'👅',l:'LA BOCCA'},{e:'👁️',l:'GLI OCCHI'},{e:'👂',l:'LE ORECCHIE'}],a:1},
+      {q:'DOVE SONO I DENTI?',opts:[{e:'👃',l:'NEL NASO'},{e:'👁️',l:'NEGLI OCCHI'},{e:'👅',l:'NELLA BOCCA'},{e:'👂',l:'NELLE ORECCHIE'}],a:2},
+      {q:'DI CHE COLORE POSSONO ESSERE I CAPELLI?',opts:[{e:'🔵',l:'BLU'},{e:'🟢',l:'VERDI'},{e:'🟤',l:'CASTANI O NERI'},{e:'🟣',l:'VIOLA'}],a:2},
+      {q:'DOVE STANNO LE SOPRACCIGLIA?',opts:[{e:'👃',l:'SUL NASO'},{e:'👁️',l:'SOPRA GLI OCCHI'},{e:'👅',l:'SULLA BOCCA'},{e:'👂',l:'SULLE ORECCHIE'}],a:1},
+    ]},
+    {id:'corpo_b',name:'IL CORPO',ico:'🦵',questions:[
+      {q:'CON COSA SI CAMMINA?',opts:[{e:'🤲',l:'LE MANI'},{e:'🦵',l:'LE GAMBE'},{e:'👃',l:'IL NASO'},{e:'👁️',l:'GLI OCCHI'}],a:1},
+      {q:'CON COSA SI ABBRACCIA?',opts:[{e:'🦵',l:'LE GAMBE'},{e:'🦶',l:'I PIEDI'},{e:'💪',l:'LE BRACCIA'},{e:'👃',l:'IL NASO'}],a:2},
+      {q:'CON COSA SI TOCCA?',opts:[{e:'🦵',l:'LE GAMBE'},{e:'🤲',l:'LE MANI'},{e:'👁️',l:'GLI OCCHI'},{e:'👅',l:'LA BOCCA'}],a:1},
+      {q:'QUANTE DITA HA UNA MANO?',opts:[{e:'4',l:'QUATTRO'},{e:'6',l:'SEI'},{e:'5',l:'CINQUE'},{e:'3',l:'TRE'}],a:2},
+      {q:'CON COSA SI CALCIA IL PALLONE?',opts:[{e:'🤲',l:'LE MANI'},{e:'🦶',l:'IL PIEDE'},{e:'👃',l:'IL NASO'},{e:'👁️',l:'GLI OCCHI'}],a:1},
+      {q:'DOVE BATTE IL CUORE?',opts:[{e:'🦵',l:'NELLA GAMBA'},{e:'🦶',l:'NEL PIEDE'},{e:'❤️',l:'NEL PETTO'},{e:'👃',l:'NEL NASO'}],a:2},
+      {q:'QUANTE GAMBE HA UN BAMBINO?',opts:[{e:'1',l:'UNA'},{e:'2',l:'DUE'},{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'}],a:1},
+    ]},
+    {id:'igiene',name:'L\'IGIENE',ico:'🧼',questions:[
+      {q:'QUANDO TI LAVI LE MANI?',opts:[{e:'🛌',l:'PRIMA DI DORMIRE'},{e:'🍽️',l:'PRIMA DI MANGIARE'},{e:'📺',l:'PRIMA DI GUARDARE LA TV'},{e:'🎮',l:'PRIMA DI GIOCARE'}],a:1},
+      {q:'CON COSA CI SI LAVA I DENTI?',opts:[{e:'🍴',l:'LA FORCHETTA'},{e:'✏️',l:'LA MATITA'},{e:'🪥',l:'LO SPAZZOLINO'},{e:'🥄',l:'IL CUCCHIAIO'}],a:2},
+      {q:'CON COSA CI SI ASCIUGA?',opts:[{e:'🧣',l:'LA SCIARPA'},{e:'🧤',l:'I GUANTI'},{e:'🏳️',l:'L\'ASCIUGAMANO'},{e:'👒',l:'IL CAPPELLO'}],a:2},
+      {q:'QUANDO CI SI LAVA?',opts:[{e:'🌧️',l:'QUANDO PIOVE'},{e:'🛁',l:'OGNI GIORNO'},{e:'🎄',l:'A NATALE'},{e:'🎂',l:'AL COMPLEANNO'}],a:1},
+    ]},
+  ]},
+
+  animali:{name:'🦁 ANIMALI',color:'#6BCB77',games:[
+    {id:'selvaggi',name:'ANIMALI SELVAGGI',ico:'🦁',questions:[
+      {q:'CHI È IL RE DELLA GIUNGLA?',opts:[{e:'🐘',l:'ELEFANTE'},{e:'🦁',l:'LEONE'},{e:'🦒',l:'GIRAFFA'},{e:'🐊',l:'COCCODRILLO'}],a:1},
+      {q:'CHI HA IL COLLO LUNGHISSIMO?',opts:[{e:'🦁',l:'LEONE'},{e:'🐘',l:'ELEFANTE'},{e:'🦒',l:'GIRAFFA'},{e:'🦓',l:'ZEBRA'}],a:2},
+      {q:'CHI HA LA PROBOSCIDE?',opts:[{e:'🦛',l:'RINOCERONTE'},{e:'🐘',l:'ELEFANTE'},{e:'🦁',l:'LEONE'},{e:'🐆',l:'LEOPARDO'}],a:1},
+      {q:'CHI HA LE STRISCE NERE E BIANCHE?',opts:[{e:'🦒',l:'GIRAFFA'},{e:'🦁',l:'LEONE'},{e:'🐘',l:'ELEFANTE'},{e:'🦓',l:'ZEBRA'}],a:3},
+      {q:'CHI VIVE NEL DESERTO?',opts:[{e:'🐧',l:'PINGUINO'},{e:'🐊',l:'COCCODRILLO'},{e:'🐪',l:'CAMMELLO'},{e:'🐻',l:'ORSO'}],a:2},
+      {q:'CHI VIVE NEI POLI?',opts:[{e:'🦁',l:'LEONE'},{e:'🐧',l:'PINGUINO'},{e:'🐘',l:'ELEFANTE'},{e:'🦒',l:'GIRAFFA'}],a:1},
+      {q:'QUALE ANIMALE È IL PIÙ GRANDE?',opts:[{e:'🐭',l:'TOPO'},{e:'🐰',l:'CONIGLIO'},{e:'🐘',l:'ELEFANTE'},{e:'🐱',l:'GATTO'}],a:2},
+    ]},
+    {id:'domestici',name:'ANIMALI DOMESTICI',ico:'🐱',questions:[
+      {q:'CHI FA MIAO?',opts:[{e:'🐶',l:'CANE'},{e:'🐱',l:'GATTO'},{e:'🐰',l:'CONIGLIO'},{e:'🐹',l:'CRICETO'}],a:1},
+      {q:'CHI FA BAU?',opts:[{e:'🐱',l:'GATTO'},{e:'🐰',l:'CONIGLIO'},{e:'🐶',l:'CANE'},{e:'🐹',l:'CRICETO'}],a:2},
+      {q:'CHI AMA MANGIARE LE CAROTE?',opts:[{e:'🐶',l:'CANE'},{e:'🐱',l:'GATTO'},{e:'🐠',l:'PESCE'},{e:'🐰',l:'CONIGLIO'}],a:3},
+      {q:'DOVE VIVE IL PESCE ROSSO?',opts:[{e:'🌳',l:'SULL\'ALBERO'},{e:'🛏️',l:'NEL LETTO'},{e:'🐠',l:'NELL\'ACQUARIO'},{e:'🏠',l:'IN CASA'}],a:2},
+      {q:'CHI PORTA IL BASTONE AL PADRONE?',opts:[{e:'🐱',l:'IL GATTO'},{e:'🐶',l:'IL CANE'},{e:'🐠',l:'IL PESCE'},{e:'🐰',l:'IL CONIGLIO'}],a:1},
+      {q:'DI CHE COLORE PUÒ ESSERE UN GATTO?',opts:[{e:'🟢',l:'VERDE'},{e:'🔵',l:'BLU'},{e:'🟠',l:'ARANCIO/BIANCO/NERO'},{e:'🟣',l:'VIOLA'}],a:2},
+      {q:'COSA MANGIA IL CANE?',opts:[{e:'🍕',l:'SOLO PIZZA'},{e:'🌿',l:'SOLO ERBA'},{e:'🦴',l:'CROCCHETTE E CARNE'},{e:'🍦',l:'SOLO GELATO'}],a:2},
+    ]},
+    {id:'uccelli',name:'GLI UCCELLI',ico:'🐦',questions:[
+      {q:'CHI SA VOLARE?',opts:[{e:'🐶',l:'CANE'},{e:'🐦',l:'UCCELLO'},{e:'🐢',l:'TARTARUGA'},{e:'🐷',l:'MAIALE'}],a:1},
+      {q:'CHI NON SA VOLARE MA SA NUOTARE?',opts:[{e:'🦅',l:'AQUILA'},{e:'🐦',l:'PASSERO'},{e:'🐧',l:'PINGUINO'},{e:'🦜',l:'PAPPAGALLO'}],a:2},
+      {q:'CHI IMITA LA VOCE UMANA?',opts:[{e:'🐦',l:'PASSERO'},{e:'🦜',l:'PAPPAGALLO'},{e:'🦅',l:'AQUILA'},{e:'🦆',l:'ANATRA'}],a:1},
+      {q:'CHI FA QUACK QUACK?',opts:[{e:'🐔',l:'GALLINA'},{e:'🦢',l:'CIGNO'},{e:'🦆',l:'ANATRA'},{e:'🦅',l:'AQUILA'}],a:2},
+      {q:'DOVE COSTRUISCE IL NIDO L\'UCCELLO?',opts:[{e:'🌊',l:'IN MARE'},{e:'🌳',l:'SULL\'ALBERO'},{e:'🏠',l:'IN CASA'},{e:'🚗',l:'IN MACCHINA'}],a:1},
+    ]},
+  ]},
+
   spazio:{name:'🪐 PIANETA ZOG',color:'#4D96FF',games:[
     {id:'pianeti',name:'I PIANETI',ico:'🪐',questions:[
-      {q:'QUAL È IL NOSTRO PIANETA? 🌍',opts:[{e:'🌙',l:'LUNA'},{e:'🌍',l:'TERRA'},{e:'☀️',l:'SOLE'},{e:'⭐',l:'STELLA'}],a:1},
+      {q:'QUAL È IL NOSTRO PIANETA?',opts:[{e:'🌙',l:'LUNA'},{e:'🌍',l:'TERRA'},{e:'☀️',l:'SOLE'},{e:'⭐',l:'STELLA'}],a:1},
       {q:'DI CHE COLORE È IL SOLE?',opts:[{e:'🔵',l:'BLU'},{e:'🟢',l:'VERDE'},{e:'🟡',l:'GIALLO/ARANCIO'},{e:'🟣',l:'VIOLA'}],a:2},
       {q:'COSA APPARE DI NOTTE IN CIELO?',opts:[{e:'☀️',l:'SOLE'},{e:'🌈',l:'ARCOBALENO'},{e:'⭐',l:'STELLE'},{e:'🌊',l:'MARE'}],a:2},
-      {q:'CHI VA NELLO SPAZIO? 👨‍🚀',opts:[{e:'👩‍🍳',l:'CUOCA'},{e:'👨‍🚀',l:'ASTRONAUTA'},{e:'👩‍🏫',l:'MAESTRA'},{e:'👨‍⚕️',l:'DOTTORE'}],a:1},
+      {q:'CHI VA NELLO SPAZIO?',opts:[{e:'👩‍🍳',l:'CUOCA'},{e:'👨‍🚀',l:'ASTRONAUTA'},{e:'👩‍🏫',l:'MAESTRA'},{e:'👨‍⚕️',l:'DOTTORE'}],a:1},
       {q:'COME SI MUOVE NELLO SPAZIO?',opts:[{e:'🚌',l:'AUTOBUS'},{e:'🚂',l:'TRENO'},{e:'🚀',l:'RAZZO'},{e:'🚗',l:'MACCHINA'}],a:2},
+      {q:'COSA SPLENDE DI NOTTE?',opts:[{e:'☀️',l:'IL SOLE'},{e:'🌙',l:'LA LUNA E LE STELLE'},{e:'💡',l:'LA LAMPADINA'},{e:'🔦',l:'LA TORCIA'}],a:1},
     ]},
     {id:'alieni',name:'GLI ALIENI DI ZOG',ico:'👽',questions:[
-      {q:'DI CHE COLORE È L\'ALIENO ZOG? 💚',opts:[{e:'🔵',l:'BLU'},{e:'🔴',l:'ROSSO'},{e:'💚',l:'VERDE'},{e:'🟡',l:'GIALLO'}],a:2},
+      {q:'DI CHE COLORE È L\'ALIENO ZOG?',opts:[{e:'🔵',l:'BLU'},{e:'🔴',l:'ROSSO'},{e:'💚',l:'VERDE'},{e:'🟡',l:'GIALLO'}],a:2},
       {q:'QUANTE ANTENNE HA ZOG? 📡📡',opts:[{e:'1',l:'UNA'},{e:'2',l:'DUE'},{e:'3',l:'TRE'},{e:'4',l:'QUATTRO'}],a:1},
       {q:'SU QUALE PIANETA VIVE ZOG?',opts:[{e:'🌍',l:'TERRA'},{e:'🌙',l:'LUNA'},{e:'🪐',l:'PIANETA ZOG'},{e:'☀️',l:'SOLE'}],a:2},
-      {q:'COSA MANGIA ZOG? ⭐',opts:[{e:'🍕',l:'PIZZA'},{e:'⭐',l:'STELLE DI METEORA'},{e:'🍎',l:'MELE'},{e:'🍦',l:'GELATO'}],a:1},
+      {q:'COSA MANGIA ZOG?',opts:[{e:'🍕',l:'PIZZA'},{e:'⭐',l:'STELLE DI METEORA'},{e:'🍎',l:'MELE'},{e:'🍦',l:'GELATO'}],a:1},
       {q:'COME SALUTA ZOG?',opts:[{e:'👋',l:'CIAO!'},{e:'🤖',l:'BEEP BOOP!'},{e:'💫',l:'ZUM ZUM!'},{e:'🌟',l:'ZOG ZOG!'}],a:3},
+      {q:'CON COSA VIAGGIA ZOG?',opts:[{e:'🚗',l:'MACCHINA'},{e:'🚀',l:'NAVICELLA SPAZIALE'},{e:'🚂',l:'TRENO'},{e:'🛵',l:'MOTORINO'}],a:1},
     ]},
   ]},
 };
 
-const OK=['FANTASTICO! 🎉','BRAVISSIMO! ⭐','ESATTO! SEI UN CAMPIONE! 🏆','PERFETTO! BAMBU È FIERO DI TE! 🐼','WOW, GIUSTO! SEI SUPER! 🌟'];
+const OK=['FANTASTICO! 🎉','BRAVISSIMO! ⭐','ESATTO! SEI UN CAMPIONE! 🏆','PERFETTO! BAMBU È FIERO DI TE! 🐼','WOW, GIUSTO! SEI SUPER! 🌟','CHE BRAVO! CONTINUA COSÌ! 💪'];
 const NO=['OPS! RIPROVA! GUARDA BENE... 👀','NON È QUELLA! DAI, CE LA FAI! 💪','QUASI! PENSA ANCORA... 🤔','NO NO! SEI QUASI ARRIVATO! 😊','RIPROVA! BAMBU CREDE IN TE! 🐼'];
-const INTRO={forme:'ABBINIAMO LE FORME! TOCCA QUELLA GIUSTA! 🔷',colori:'CHE BELLI I COLORI! TOCCA QUELLO GIUSTO! 🎨',lettere:'LE LETTERE! TOCCA QUELLA CHE VEDI! 🔤',animali:'GLI ANIMALI! CHI FA QUEL VERSO? 🐮',numeri:'CONTIAMO INSIEME! QUANTI NE VEDI? 🔢',verdure:'LE VERDURE! SAI QUALE È? 🥕',insetti:'GLI INSETTI! LI CONOSCI? 🦋',alberi:'LA NATURA! SAI RISPONDERE? 🌳',pesci:'GLI ANIMALI DEL MARE! LI CONOSCI? 🐠',colori_mare:'I COLORI DEL MARE! 🌊',animali_mont:'GLI ANIMALI DI MONTAGNA! 🦅',stagioni:'LE QUATTRO STAGIONI! SAI QUAL È? 🍂',lettere_scuola:'L\'ALFABETO! CHE LETTERA È? 🔤',numeri_scuola:'I NUMERI! SEI BRAVO A CONTARE? 🔢',strumenti:'GLI STRUMENTI DI SCUOLA! ✏️',pianeti:'LO SPAZIO! SAI LA RISPOSTA? 🪐',alieni:'IL PIANETA ZOG! CONOSCI ZOG? 👽'};
+const INTRO={forme:'ABBINIAMO LE FORME! 🔷',colori:'CHE BELLI I COLORI! 🎨',lettere:'LE LETTERE! TOCCA QUELLA GIUSTA! 🔤',frasi_casa:'RISPONDI ALLE DOMANDE! 💬',animali_f:'GLI ANIMALI! CHI FA QUEL VERSO? 🐮',numeri:'CONTIAMO INSIEME! 🔢',verdure:'LE VERDURE DELL\'ORTO! 🥕',insetti:'GLI INSETTI! LI CONOSCI? 🦋',natura:'LA NATURA! 🌳',pesci:'GLI ANIMALI DEL MARE! 🐠',frasi_mare:'DOMANDE SUL MARE! 🌊',animali_mont:'GLI ANIMALI DI MONTAGNA! 🦅',stagioni:'LE QUATTRO STAGIONI! 🍂',alfabeto:'L\'ALFABETO! 🔤',numeri_s:'I NUMERI! 🔢',frasi_scuola:'DOMANDE DI SCUOLA! 🏫',viso:'LE PARTI DEL VISO! 😊',corpo_b:'IL CORPO UMANO! 🦵',igiene:'L\'IGIENE! 🧼',selvaggi:'ANIMALI SELVAGGI! 🦁',domestici:'ANIMALI DOMESTICI! 🐱',uccelli:'GLI UCCELLI! 🐦',pianeti:'LO SPAZIO! 🪐',alieni:'IL PIANETA ZOG! 👽'};
 
 let curWorld='',curGame=null,curQ=0,totalStars=0,answered=false,wrongShown=false;
 
@@ -403,13 +528,15 @@ function checkAnswer(idx,btn,q){
     answered=true;
     btn.classList.add('correct');
     totalStars++;updateStars();
+    soundCorrect();
     bounceBambu('game');
     const msg=OK[Math.floor(Math.random()*OK.length)];
     setBubble('game',msg);
-    setTimeout(()=>showCelebration(msg),600);
+    setTimeout(()=>showCelebration(msg),700);
   } else {
     btn.classList.add('wrong');
     setTimeout(()=>btn.classList.remove('wrong'),400);
+    soundWrong();
     if(!wrongShown){
       wrongShown=true;
       shakeBambu('game');
@@ -418,13 +545,13 @@ function checkAnswer(idx,btn,q){
         document.querySelectorAll('.opt-btn').forEach((b,i)=>{
           if(i===q.a)b.style.outline='4px dashed #FFD93D';
         });
-      },1000);
+      },1200);
     }
   }
 }
 
 function showCelebration(msg){
-  const s=totalStars>=10?'⭐⭐⭐':totalStars>=5?'⭐⭐':'⭐';
+  const s=totalStars>=15?'⭐⭐⭐':totalStars>=7?'⭐⭐':'⭐';
   document.getElementById('cel-stars').textContent=s;
   document.getElementById('cel-msg').textContent=msg;
   document.getElementById('cel-sub').textContent=`STELLE TOTALI: ${totalStars} ⭐`;
@@ -438,7 +565,7 @@ function nextQuestion(){
   if(curQ>=curGame.questions.length){
     setBubble('game','HAI FINITO! SEI UN CAMPIONE! 🏆');
     bounceBambu('game');
-    setTimeout(()=>backToWorld(),2000);
+    setTimeout(()=>backToWorld(),2200);
   } else {
     renderQuestion();
     setBubble('game','PROSSIMA DOMANDA! DAI CHE CE LA FAI! 💪');
@@ -459,7 +586,7 @@ function launchConfetti(){
   (function draw(){
     ctx.clearRect(0,0,c.width,c.height);
     ps.forEach(p=>{p.y+=p.sp;p.rot+=p.rs;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.col;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);ctx.restore()});
-    if(++f<100)requestAnimationFrame(draw);else ctx.clearRect(0,0,c.width,c.height);
+    if(++f<110)requestAnimationFrame(draw);else ctx.clearRect(0,0,c.width,c.height);
   })();
 }
 </script>
